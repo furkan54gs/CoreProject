@@ -1,7 +1,7 @@
-namespace 
+namespace
 {
     public class newclass
     {
-        
+
     }
 }
