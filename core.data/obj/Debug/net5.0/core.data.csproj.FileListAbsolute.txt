@@ -1,0 +1,12 @@
+C:\Users\mfurk\Code\CoreProject\core.data\bin\Debug\net5.0\core.data.deps.json
+C:\Users\mfurk\Code\CoreProject\core.data\bin\Debug\net5.0\core.data.dll
+C:\Users\mfurk\Code\CoreProject\core.data\bin\Debug\net5.0\ref\core.data.dll
+C:\Users\mfurk\Code\CoreProject\core.data\bin\Debug\net5.0\core.data.pdb
+C:\Users\mfurk\Code\CoreProject\core.data\obj\Debug\net5.0\core.data.csproj.AssemblyReference.cache
+C:\Users\mfurk\Code\CoreProject\core.data\obj\Debug\net5.0\core.data.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\mfurk\Code\CoreProject\core.data\obj\Debug\net5.0\core.data.AssemblyInfoInputs.cache
+C:\Users\mfurk\Code\CoreProject\core.data\obj\Debug\net5.0\core.data.AssemblyInfo.cs
+C:\Users\mfurk\Code\CoreProject\core.data\obj\Debug\net5.0\core.data.csproj.CoreCompileInputs.cache
+C:\Users\mfurk\Code\CoreProject\core.data\obj\Debug\net5.0\core.data.dll
+C:\Users\mfurk\Code\CoreProject\core.data\obj\Debug\net5.0\ref\core.data.dll
+C:\Users\mfurk\Code\CoreProject\core.data\obj\Debug\net5.0\core.data.pdb
