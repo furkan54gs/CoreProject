@@ -3,5 +3,8 @@
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
   </PropertyGroup>
-
+  <ItemGroup>
+    <ProjectReference Include="..\core.data\core.data.csproj"/>
+    <ProjectReference Include="..\core.entity\core.entity.csproj"/>
+  </ItemGroup>
 </Project>

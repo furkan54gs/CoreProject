@@ -38,6 +38,9 @@
           "Newtonsoft.Json": "13.0.1",
           "Pomelo.EntityFrameworkCore.MySql": "5.0.1",
           "Stripe.net": "39.64.0",
+          "core.business": "1.0.0",
+          "core.data": "1.0.0",
+          "core.entity": "1.0.0",
           "Microsoft.AspNetCore.Antiforgery": "5.0.0.0",
           "Microsoft.AspNetCore.Authentication.Abstractions": "5.0.0.0",
           "Microsoft.AspNetCore.Authentication.Cookies": "5.0.0.0",
@@ -648,6 +651,39 @@
       "System.Windows.Extensions/5.0.0": {
         "dependencies": {
           "System.Drawing.Common": "5.0.0"
+        }
+      },
+      "core.business/1.0.0": {
+        "dependencies": {
+          "core.data": "1.0.0",
+          "core.entity": "1.0.0"
+        },
+        "runtime": {
+          "core.business.dll": {}
+        },
+        "compile": {
+          "core.business.dll": {}
+        }
+      },
+      "core.data/1.0.0": {
+        "dependencies": {
+          "Microsoft.EntityFrameworkCore.Design": "5.0.9",
+          "Pomelo.EntityFrameworkCore.MySql": "5.0.1",
+          "core.entity": "1.0.0"
+        },
+        "runtime": {
+          "core.data.dll": {}
+        },
+        "compile": {
+          "core.data.dll": {}
+        }
+      },
+      "core.entity/1.0.0": {
+        "runtime": {
+          "core.entity.dll": {}
+        },
+        "compile": {
+          "core.entity.dll": {}
         }
       },
       "Microsoft.AspNetCore.Antiforgery/5.0.0.0": {
@@ -2578,6 +2614,21 @@
       "sha512": "sha512-c1ho9WU9ZxMZawML+ssPKZfdnrg/OjR3pe0m9v8230z3acqphwvPJqzAkH54xRYm5ntZHGG1EPP3sux9H3qSPg==",
       "path": "system.windows.extensions/5.0.0",
       "hashPath": "system.windows.extensions.5.0.0.nupkg.sha512"
+    },
+    "core.business/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "core.data/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "core.entity/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
     },
     "Microsoft.AspNetCore.Antiforgery/5.0.0.0": {
       "type": "referenceassembly",

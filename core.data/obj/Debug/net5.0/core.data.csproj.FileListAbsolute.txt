@@ -10,3 +10,9 @@ C:\Users\mfurk\Code\CoreProject\core.data\obj\Debug\net5.0\core.data.csproj.Core
 C:\Users\mfurk\Code\CoreProject\core.data\obj\Debug\net5.0\core.data.dll
 C:\Users\mfurk\Code\CoreProject\core.data\obj\Debug\net5.0\ref\core.data.dll
 C:\Users\mfurk\Code\CoreProject\core.data\obj\Debug\net5.0\core.data.pdb
+C:\Users\mfurk\Code\CoreProject\core.data\bin\Debug\net5.0\core.data.runtimeconfig.json
+C:\Users\mfurk\Code\CoreProject\core.data\bin\Debug\net5.0\core.data.runtimeconfig.dev.json
+C:\Users\mfurk\Code\CoreProject\core.data\bin\Debug\net5.0\core.entity.dll
+C:\Users\mfurk\Code\CoreProject\core.data\bin\Debug\net5.0\core.entity.pdb
+C:\Users\mfurk\Code\CoreProject\core.data\obj\Debug\net5.0\core.data.csproj.CopyComplete
+C:\Users\mfurk\Code\CoreProject\core.data\obj\Debug\net5.0\core.data.genruntimeconfig.cache

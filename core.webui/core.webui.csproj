@@ -3,6 +3,11 @@
     <TargetFramework>net5.0</TargetFramework>
   </PropertyGroup>
   <ItemGroup>
+    <ProjectReference Include="..\core.data\core.data.csproj"/>
+    <ProjectReference Include="..\core.entity\core.entity.csproj"/>
+    <ProjectReference Include="..\core.business\core.business.csproj"/>
+  </ItemGroup>
+  <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="5.0.9"/>
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="5.0.9"/>
     <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="5.0.1"/>

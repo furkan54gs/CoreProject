@@ -473,6 +473,45 @@
             "rid": "win"
           }
         }
+      },
+      "core.business/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v5.0",
+        "dependencies": {
+          "core.data": "1.0.0",
+          "core.entity": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/core.business.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/core.business.dll": {}
+        }
+      },
+      "core.data/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v5.0",
+        "dependencies": {
+          "Microsoft.EntityFrameworkCore.Design": "5.0.9",
+          "Pomelo.EntityFrameworkCore.MySql": "5.0.1",
+          "core.entity": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/core.data.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/core.data.dll": {}
+        }
+      },
+      "core.entity/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v5.0",
+        "compile": {
+          "bin/placeholder/core.entity.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/core.entity.dll": {}
+        }
       }
     }
   },
@@ -1467,6 +1506,21 @@
         "useSharedDesignerContext.txt",
         "version.txt"
       ]
+    },
+    "core.business/1.0.0": {
+      "type": "project",
+      "path": "../core.business/core.business.csproj",
+      "msbuildProject": "../core.business/core.business.csproj"
+    },
+    "core.data/1.0.0": {
+      "type": "project",
+      "path": "../core.data/core.data.csproj",
+      "msbuildProject": "../core.data/core.data.csproj"
+    },
+    "core.entity/1.0.0": {
+      "type": "project",
+      "path": "../core.entity/core.entity.csproj",
+      "msbuildProject": "../core.entity/core.entity.csproj"
     }
   },
   "projectFileDependencyGroups": {
@@ -1475,7 +1529,10 @@
       "Microsoft.EntityFrameworkCore.Design >= 5.0.9",
       "Newtonsoft.Json >= 13.0.1",
       "Pomelo.EntityFrameworkCore.MySql >= 5.0.1",
-      "Stripe.net >= 39.64.0"
+      "Stripe.net >= 39.64.0",
+      "core.business >= 1.0.0",
+      "core.data >= 1.0.0",
+      "core.entity >= 1.0.0"
     ]
   },
   "packageFolders": {
@@ -1484,11 +1541,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "c:\\Users\\mfurk\\Code\\CoreProject\\core.webui\\core.webui.csproj",
+      "projectUniqueName": "C:\\Users\\mfurk\\Code\\CoreProject\\core.webui\\core.webui.csproj",
       "projectName": "core.webui",
-      "projectPath": "c:\\Users\\mfurk\\Code\\CoreProject\\core.webui\\core.webui.csproj",
+      "projectPath": "C:\\Users\\mfurk\\Code\\CoreProject\\core.webui\\core.webui.csproj",
       "packagesPath": "C:\\Users\\mfurk\\.nuget\\packages\\",
-      "outputPath": "c:\\Users\\mfurk\\Code\\CoreProject\\core.webui\\obj\\",
+      "outputPath": "C:\\Users\\mfurk\\Code\\CoreProject\\core.webui\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\mfurk\\AppData\\Roaming\\NuGet\\NuGet.Config"
@@ -1502,7 +1559,17 @@
       "frameworks": {
         "net5.0": {
           "targetAlias": "net5.0",
-          "projectReferences": {}
+          "projectReferences": {
+            "C:\\Users\\mfurk\\Code\\CoreProject\\core.business\\core.business.csproj": {
+              "projectPath": "C:\\Users\\mfurk\\Code\\CoreProject\\core.business\\core.business.csproj"
+            },
+            "C:\\Users\\mfurk\\Code\\CoreProject\\core.data\\core.data.csproj": {
+              "projectPath": "C:\\Users\\mfurk\\Code\\CoreProject\\core.data\\core.data.csproj"
+            },
+            "C:\\Users\\mfurk\\Code\\CoreProject\\core.entity\\core.entity.csproj": {
+              "projectPath": "C:\\Users\\mfurk\\Code\\CoreProject\\core.entity\\core.entity.csproj"
+            }
+          }
         }
       },
       "warningProperties": {

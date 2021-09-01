@@ -1,0 +1,17 @@
+C:\Users\mfurk\Code\CoreProject\core.business\bin\Debug\net5.0\core.business.deps.json
+C:\Users\mfurk\Code\CoreProject\core.business\bin\Debug\net5.0\core.business.dll
+C:\Users\mfurk\Code\CoreProject\core.business\bin\Debug\net5.0\ref\core.business.dll
+C:\Users\mfurk\Code\CoreProject\core.business\bin\Debug\net5.0\core.business.pdb
+C:\Users\mfurk\Code\CoreProject\core.business\bin\Debug\net5.0\core.data.dll
+C:\Users\mfurk\Code\CoreProject\core.business\bin\Debug\net5.0\core.entity.dll
+C:\Users\mfurk\Code\CoreProject\core.business\bin\Debug\net5.0\core.data.pdb
+C:\Users\mfurk\Code\CoreProject\core.business\bin\Debug\net5.0\core.entity.pdb
+C:\Users\mfurk\Code\CoreProject\core.business\obj\Debug\net5.0\core.business.csproj.AssemblyReference.cache
+C:\Users\mfurk\Code\CoreProject\core.business\obj\Debug\net5.0\core.business.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\mfurk\Code\CoreProject\core.business\obj\Debug\net5.0\core.business.AssemblyInfoInputs.cache
+C:\Users\mfurk\Code\CoreProject\core.business\obj\Debug\net5.0\core.business.AssemblyInfo.cs
+C:\Users\mfurk\Code\CoreProject\core.business\obj\Debug\net5.0\core.business.csproj.CoreCompileInputs.cache
+C:\Users\mfurk\Code\CoreProject\core.business\obj\Debug\net5.0\core.business.csproj.CopyComplete
+C:\Users\mfurk\Code\CoreProject\core.business\obj\Debug\net5.0\core.business.dll
+C:\Users\mfurk\Code\CoreProject\core.business\obj\Debug\net5.0\ref\core.business.dll
+C:\Users\mfurk\Code\CoreProject\core.business\obj\Debug\net5.0\core.business.pdb
