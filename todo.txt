@@ -1,0 +1,15 @@
+
+
+-navbardaki 'products' sekmesinde tüm onaylanan tüm productslar listelensin.
+-anasayfadaki 'tüm kategoriler' yerine unclickable 'kategoriler' yazısı eklensin.
+-profil sayfası
+-model config fluent apilerin düzenlenmesi
+-login'de ve diğer kısımlarda kullanılan js validation errorlar düzeltilecek ve tr dili göster
+-navbar linkleri ekle ve düzenle
+-harita ekle ve yerini göster.
+
+
+*category subtree
+
+
+!program içindeki detaylı hata gösterimi açık

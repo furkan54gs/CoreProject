@@ -1,7 +1,6 @@
 {
   "name": "core.webui",
   "version": "1.0.0",
-  "description": "",
   "main": "index.js",
   "dependencies": {
     "@fortawesome/fontawesome-free": "^5.15.4",
@@ -18,5 +17,6 @@
   },
   "keywords": [],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "description": ""
 }

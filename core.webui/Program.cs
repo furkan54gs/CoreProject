@@ -21,8 +21,8 @@ namespace core.webui
             Host.CreateDefaultBuilder(args)
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
-                    webBuilder.UseStartup<Startup>();
-                     //.CaptureStartupErrors(true).UseSetting("detailedErrors","true")     -> error message with details in page. use only development
+                    webBuilder.UseStartup<Startup>().CaptureStartupErrors(true).UseSetting("detailedErrors","true");
+                  //       -> error message with details in page. use only development
                 });
     }
 }
