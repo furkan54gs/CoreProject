@@ -2,19 +2,19 @@
 
 @section Css
 {
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css">
+<link rel="stylesheet" href="https://cdn.datatables.net/1.11.0/css/dataTables.bootstrap5.min.css">
 }
-  
+
 @section Scripts
 {
-    <script src="//cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
-    <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"></script>
+<script src="https://cdn.datatables.net/1.11.0/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.11.0/js/dataTables.bootstrap5.min.js"></script>
 
-    <script>
-        $(document).ready( function () {
-            $('#myTable').DataTable();
-        });
-    </script>
+<script>
+    $(document).ready(function () {
+        $('#myTable').DataTable();
+    });
+</script>
 
 }
 
@@ -37,33 +37,35 @@
                 </tr>
             </thead>
             <tbody>
-                @if(Model.Count()>0)
+                @if (Model.Count() > 0)
                 {
-                       @foreach (var item in Model)
-                        {
-                            <tr class="@(item.EmailConfirmed?"":"bg-warning")">
-                                <td>@item.FirstName</td>
-                                <td>@item.LastName</td>                              
-                                <td>@item.UserName</td>                              
-                                <td>@item.Email</td>                              
-                                <td>@item.EmailConfirmed</td>                              
-                                <td>
-                                    <a href="/admin/user/@item.Id" class="btn btn-primary btn-sm mr-2">Edit</a>
-                                    
-                                    <form action="/admin/user/delete" method="POST" style="display: inline;">
-                                        <input type="hidden" name="UserId" value="@item.Id">
-                                        <button type="submit" class="btn btn-danger btn-sm">Delete</button>
-                                    </form>
-                                </td>
+                    @foreach (var item in Model)
+                    {
+                        <tr class="@(item.EmailConfirmed?"":"bg-warning")">
+                            <td>@item.FirstName</td>
+                            <td>@item.LastName</td>
+                            <td>@item.UserName</td>
+                            <td>@item.Email</td>
+                            <td>@item.EmailConfirmed</td>
+                            <td>
+                                <a href="/admin/user/@item.Id" class="btn btn-primary btn-sm mr-2">Edit</a>
+
+                                <form action="/admin/user/delete" method="POST" style="display: inline;">
+                                    <input type="hidden" name="UserId" value="@item.Id">
+                                    <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                                </form>
+                            </td>
                         </tr>
-                        }
-                }else{
+                    }
+                }
+                else
+                {
                     <div class="alert alert-warning">
                         <h3>No Users</h3>
                     </div>
                 }
 
-             
+
             </tbody>
         </table>
     </div>

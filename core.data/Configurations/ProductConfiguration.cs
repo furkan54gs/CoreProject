@@ -12,8 +12,8 @@ namespace core.data.Configurations
 
             builder.Property(m=>m.Name).IsRequired().HasMaxLength(100);
 
-            builder.Property(m=>m.DateAdded).HasDefaultValueSql("date('now')");  // mssql getdate()
-            // builder.Property(m=>m.DateAdded).HasDefaultValueSql ("date('now')");   // sqlite date('now')
+            builder.Property(m=>m.DateAdded).HasDefaultValueSql("CURRENT_TIMESTAMP(6)");    // mssql getdate()
+                                                                                            // sqlite date('now')
         }
     }
 }

@@ -1,7 +1,7 @@
 @model Product
 
 <form method="POST">
-    <input type="hidden" name="ProductId" value="@Model.ProductId"/>
+    <input type="hidden" name="ProductId" value="@Model.ProductId" />
     <div class="form-group">
         <label for="Name">Name</label>
         <input asp-for="Name" value="@Model.Name" class="form-control">
@@ -21,8 +21,8 @@
     @* <div class="form-group">
         <label for="CategoryId">CategoryId</label>
         <select asp-for="CategoryId" asp-items="@ViewBag.Categories" class="form-control">
-            <option selected disabled>Seçiniz</option>
+        <option selected disabled>Seçiniz</option>
         </select>
-    </div> *@
+        </div> *@
     <button type="submit" class="btn btn-primary">Submit</button>
 </form>

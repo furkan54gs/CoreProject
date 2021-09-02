@@ -34,8 +34,8 @@ namespace core.webui
         public void ConfigureServices(IServiceCollection services)
         {
             var serverVersion = new MySqlServerVersion(new Version(8, 0, 26));
-            services.AddDbContext<ApplicationContext>(options => options.UseMySql(_configuration.GetConnectionString("MySqlConnection"),serverVersion));
-            services.AddDbContext<CoreContext>(options => options.UseMySql(_configuration.GetConnectionString("MySqlConnection"),serverVersion));
+            services.AddDbContext<ApplicationContext>(options => options.UseMySql(_configuration.GetConnectionString("MySqlConnection"), serverVersion));
+            services.AddDbContext<CoreContext>(options => options.UseMySql(_configuration.GetConnectionString("MySqlConnection"), serverVersion));
 
             services.AddIdentity<User, IdentityRole>().AddEntityFrameworkStores<ApplicationContext>().AddDefaultTokenProviders();
 
@@ -109,17 +109,17 @@ namespace core.webui
                 app.UseDeveloperExceptionPage();
             }
 
-app.UseAuthentication();
+            app.UseAuthentication();
             app.UseRouting();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {
- endpoints.MapControllerRoute(
-                  name: "orders",
-                  pattern: "orders",
-                  defaults: new { controller = "Cart", action = "GetOrders" }
-              );
+                endpoints.MapControllerRoute(
+                                 name: "orders",
+                                 pattern: "orders",
+                                 defaults: new { controller = "Cart", action = "GetOrders" }
+                             );
 
 
                 endpoints.MapControllerRoute(
@@ -225,7 +225,7 @@ app.UseAuthentication();
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
             });
-              SeedIdentity.Seed(userManager, roleManager, cartService, configuration).Wait();
+            SeedIdentity.Seed(userManager, roleManager, cartService, configuration).Wait();
 
         }
     }
