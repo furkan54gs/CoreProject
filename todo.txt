@@ -1,15 +1,28 @@
 
-
--navbardaki 'products' sekmesinde tüm onaylanan tüm productslar listelensin.
--anasayfadaki 'tüm kategoriler' yerine unclickable 'kategoriler' yazısı eklensin.
+-------------------------BACKEND----------------------
 -profil sayfası
--model config fluent apilerin düzenlenmesi
--login'de ve diğer kısımlarda kullanılan js validation errorlar düzeltilecek ve tr dili göster
+-model config fluent apilerin düzenlenmesi ve türkçeleştirilmesi
 -navbar linkleri ekle ve düzenle
 -harita ekle ve yerini göster.
+-ödeme yöntemi aktifleştir.
+-ürünlerin özelliğine göre artan veya azalan sıralama ekle
+-ürün filtresi ekle
 
 
+
+--------------------------FRONTEND--------------------
+-profil sayfası
+-navbar linkleri ekle ve düzenle
+-footer'ı belli bir yükseklikte tut
+
+
+
+-------------------------SONRASI İÇİN-----------------
+*category amazon arayüzüne benzer yapı
 *category subtree
 
 
+
+-------------------------HATIRLATMALAR----------------
 !program içindeki detaylı hata gösterimi açık
+!eposta ayarları yapılı değil

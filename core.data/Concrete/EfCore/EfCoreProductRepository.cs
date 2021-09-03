@@ -27,6 +27,22 @@ namespace core.data.Concrete.EfCore
                             .FirstOrDefault();
         }
 
+        public int GetCountByApproved(bool isApproved)
+        {
+            if (isApproved == false)
+            {
+                return CoreContext.Products.
+                                Where(i => i.IsApproved == false)
+                                .Count();
+            }
+            else
+            {
+                return CoreContext.Products.
+                               Where(i => i.IsApproved == true)
+                               .Count();
+            }
+        }
+
         public int GetCountByCategory(string category)
         {
 
@@ -66,10 +82,12 @@ namespace core.data.Concrete.EfCore
 
             if (!string.IsNullOrEmpty(name))
             {
-                products = products
-                                .Include(i => i.ProductCategories)
-                                .ThenInclude(i => i.Category)
-                                .Where(i => i.ProductCategories.Any(a => a.Category.Url == name));
+                if (name != "list")
+                {
+                    products = products.Include(i => i.ProductCategories)
+                                       .ThenInclude(i => i.Category)
+                                       .Where(i => i.ProductCategories.Any(a => a.Category.Url == name));
+                }
             }
 
             return products.Skip((page - 1) * pageSize).Take(pageSize).ToList();
@@ -109,5 +127,6 @@ namespace core.data.Concrete.EfCore
 
             }
         }
+
     }
 }

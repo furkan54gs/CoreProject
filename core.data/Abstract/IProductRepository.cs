@@ -12,5 +12,6 @@ namespace core.data.Abstract
        List<Product> GetHomePageProducts();
        int GetCountByCategory(string category);
        void Update(Product entity, int[] categoryIds);
+       int GetCountByApproved(bool isApproved);
     }
 }

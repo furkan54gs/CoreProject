@@ -9,7 +9,7 @@ namespace core.business.Concrete
     public class ProductManager : IProductService
     {
 
-         private readonly IUnitOfWork _unitofwork;
+        private readonly IUnitOfWork _unitofwork;
         public ProductManager(IUnitOfWork unitofwork)
         {
             _unitofwork = unitofwork;
@@ -17,7 +17,7 @@ namespace core.business.Concrete
 
         public bool Create(Product entity)
         {
-            if(Validation(entity))
+            if (Validation(entity))
             {
                 _unitofwork.Products.Create(entity);
                 _unitofwork.Save();
@@ -37,7 +37,10 @@ namespace core.business.Concrete
         {
             return _unitofwork.Products.GetAll();
         }
-
+        public int GetCountByApproved(bool isApproved)
+        {
+            return _unitofwork.Products.GetCountByApproved(isApproved);
+        }
         public Product GetById(int id)
         {
             return _unitofwork.Products.GetById(id);
@@ -55,7 +58,7 @@ namespace core.business.Concrete
 
         public List<Product> GetHomePageProducts()
         {
-           return _unitofwork.Products.GetHomePageProducts();
+            return _unitofwork.Products.GetHomePageProducts();
         }
 
         public Product GetProductDetails(string url)
@@ -63,14 +66,14 @@ namespace core.business.Concrete
             return _unitofwork.Products.GetProductDetails(url);
         }
 
-        public List<Product> GetProductsByCategory(string name,int page,int pageSize)
+        public List<Product> GetProductsByCategory(string name, int page, int pageSize)
         {
-            return _unitofwork.Products.GetProductsByCategory(name,page,pageSize);
+            return _unitofwork.Products.GetProductsByCategory(name, page, pageSize);
         }
 
         public List<Product> GetSearchResult(string searchString)
         {
-           return _unitofwork.Products.GetSearchResult(searchString);
+            return _unitofwork.Products.GetSearchResult(searchString);
         }
 
         public void Update(Product entity)
@@ -81,15 +84,15 @@ namespace core.business.Concrete
 
         public bool Update(Product entity, int[] categoryIds)
         {
-            if(Validation(entity))
+            if (Validation(entity))
             {
-                if(categoryIds.Length==0)
+                if (categoryIds.Length == 0)
                 {
                     ErrorMessage += "Ürün için en az bir kategori seçmelisiniz.";
                     return false;
                 }
-                 _unitofwork.Products.Update(entity,categoryIds);
-                 _unitofwork.Save();
+                _unitofwork.Products.Update(entity, categoryIds);
+                _unitofwork.Save();
                 return true;
             }
             return false;
@@ -101,16 +104,16 @@ namespace core.business.Concrete
         {
             var isValid = true;
 
-            if(string.IsNullOrEmpty(entity.Name))
+            if (string.IsNullOrEmpty(entity.Name))
             {
                 ErrorMessage += "ürün ismi girmelisiniz.\n";
-                isValid=false;
+                isValid = false;
             }
 
-            if(entity.Price<0)
+            if (entity.Price < 0)
             {
                 ErrorMessage += "ürün fiyatı negatif olamaz.\n";
-                isValid=false;
+                isValid = false;
             }
 
             return isValid;

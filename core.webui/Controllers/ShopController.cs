@@ -15,59 +15,27 @@ namespace core.webui.Controllers
         }
 
 
-        // localhost/products/telefon?page=1
+
+        //   localhost/products/telefon?page=1
         public IActionResult List(string category, int page = 1)
         {
             const int pageSize = 2;
+
             var productViewModel = new ProductListViewModel()
             {
+                Products = _productService.GetProductsByCategory(category, page, pageSize),
                 PageInfo = new PageInfo()
                 {
-                    TotalItems = _productService.GetCountByCategory(category),
+                    TotalItems = (category == "list") ? _productService.GetCountByApproved(true) : _productService.GetCountByCategory(category),
                     CurrentPage = page,
                     ItemsPerPage = pageSize,
                     CurrentCategory = category
-                },
-                Products = _productService.GetProductsByCategory(category, page, pageSize)
+                }
+
             };
-
             return View(productViewModel);
         }
 
-        /*
-         public IActionResult List(string category, int page = 1)
-        {
-
-            const int pageSize = 2;
-            var productViewModel = new ProductListViewModel();
-
-            if (category == "All")
-            {
-                productViewModel.Products = _productService.GetAll();
-                productViewModel.PageInfo = new PageInfo()
-                {
-                    TotalItems = productViewModel.Products.Count(),
-                    CurrentPage = page,
-                    ItemsPerPage = pageSize,
-                    CurrentCategory = category
-                };
-            }
-
-            else
-            {
-                productViewModel.Products = _productService.GetProductsByCategory(category, page, pageSize);
-                productViewModel.PageInfo = new PageInfo()
-                {
-                    TotalItems = _productService.GetCountByCategory(category),
-                    CurrentPage = page,
-                    ItemsPerPage = pageSize,
-                    CurrentCategory = category
-                };
-            }
-
-            return View(productViewModel);
-        }
-        */
 
         public IActionResult Details(string url)
         {

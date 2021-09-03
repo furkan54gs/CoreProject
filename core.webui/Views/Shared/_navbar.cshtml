@@ -1,9 +1,12 @@
 <div class="navbar bg-danger navbar-dark navbar-expand-sm">
     <div class="container">
         <a href="/" class="navbar-brand">CoreApp</a>
-        <ul class="navbar-nav mr-auto">
+        <ul class="navbar-nav me-auto">
             <li class="nav-item">
-                <a href="/products" class="nav-link">Products</a>
+                <a asp-controller="Shop" asp-action="List" asp-route-category="list" class="nav-link">Ürünlerimiz</a>
+            </li>
+            <li class="nav-item">
+                <a asp-controller="Home" asp-action="About" class="nav-link">Hakkımızda</a>
             </li>
 
             @if (User.Identity.IsAuthenticated)
@@ -18,16 +21,16 @@
                 if (User.IsInRole("admin"))
                 {
                     <li class="nav-item">
-                        <a href="/admin/products" class="nav-link">Admin Products</a>
+                        <a href="/admin/products" class="nav-link">Admin Ürünler</a>
                     </li>
                     <li class="nav-item">
-                        <a href="/admin/categories" class="nav-link">Admin Categories</a>
+                        <a href="/admin/categories" class="nav-link">Admin Kategoriler</a>
                     </li>
                     <li class="nav-item">
-                        <a href="/admin/role/list" class="nav-link">Roles</a>
+                        <a href="/admin/role/list" class="nav-link">Roller</a>
                     </li>
                     <li class="nav-item">
-                        <a href="/admin/user/list" class="nav-link">Users</a>
+                        <a href="/admin/user/list" class="nav-link">Kullanıcılar</a>
                     </li>
                 }
             }
@@ -43,16 +46,16 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="/account/logout" class="nav-link">Logout</a>
+                    <a href="/account/logout" class="nav-link">Çıkış</a>
                 </li>
             }
             else
             {
                 <li class="nav-item">
-                    <a href="/account/login" class="nav-link">Login</a>
+                    <a href="/account/login" class="nav-link">Giriş</a>
                 </li>
                 <li class="nav-item">
-                    <a href="/account/register" class="nav-link">Register</a>
+                    <a href="/account/register" class="nav-link">Üye Ol</a>
                 </li>
             }
         </ul>

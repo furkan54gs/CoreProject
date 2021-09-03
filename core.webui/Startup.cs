@@ -200,7 +200,6 @@ namespace core.webui
                     defaults: new { controller = "Admin", action = "CategoryEdit" }
                 );
 
-
                 // localhost/search
                 endpoints.MapControllerRoute(
                     name: "search",
@@ -215,7 +214,7 @@ namespace core.webui
                 );
 
                 endpoints.MapControllerRoute(
-                    name: "products",
+                    name: "productsbycategories",
                     pattern: "products/{category?}",
                     defaults: new { controller = "Shop", action = "list" }
                 );

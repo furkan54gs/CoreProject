@@ -81,7 +81,6 @@ C:\Users\mfurk\Code\CoreProject\core.webui\obj\Debug\net5.0\Razor\Views\Cart\Ind
 C:\Users\mfurk\Code\CoreProject\core.webui\obj\Debug\net5.0\Razor\Views\Cart\Orders.cshtml.g.cs
 C:\Users\mfurk\Code\CoreProject\core.webui\obj\Debug\net5.0\Razor\Views\Cart\Success.cshtml.g.cs
 C:\Users\mfurk\Code\CoreProject\core.webui\obj\Debug\net5.0\Razor\Views\Home\About.cshtml.g.cs
-C:\Users\mfurk\Code\CoreProject\core.webui\obj\Debug\net5.0\Razor\Views\Home\MyView.cshtml.g.cs
 C:\Users\mfurk\Code\CoreProject\core.webui\obj\Debug\net5.0\Razor\Views\Product\Create.cshtml.g.cs
 C:\Users\mfurk\Code\CoreProject\core.webui\obj\Debug\net5.0\Razor\Views\Product\Details.cshtml.g.cs
 C:\Users\mfurk\Code\CoreProject\core.webui\obj\Debug\net5.0\Razor\Views\Product\Edit.cshtml.g.cs

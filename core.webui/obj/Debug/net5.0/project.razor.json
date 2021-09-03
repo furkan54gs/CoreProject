@@ -15801,11 +15801,6 @@
       "FileKind": "mvc"
     },
     {
-      "FilePath": "c:\\Users\\mfurk\\Code\\CoreProject\\core.webui\\Views\\Home\\MyView.cshtml",
-      "TargetPath": "Views\\Home\\MyView.cshtml",
-      "FileKind": "mvc"
-    },
-    {
       "FilePath": "c:\\Users\\mfurk\\Code\\CoreProject\\core.webui\\Views\\Shared\\_ResultMessage.cshtml",
       "TargetPath": "Views\\Shared\\_ResultMessage.cshtml",
       "FileKind": "mvc"

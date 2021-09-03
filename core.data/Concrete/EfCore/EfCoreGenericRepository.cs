@@ -13,6 +13,12 @@ namespace core.data.Concrete.EfCore
         {
             context = ctx;
         }
+
+        public List<TEntity> GetAll()
+        {
+            return context.Set<TEntity>().ToList();
+        }
+
         public void Create(TEntity entity)
         {
             context.Set<TEntity>().Add(entity);
@@ -21,11 +27,6 @@ namespace core.data.Concrete.EfCore
         public void Delete(TEntity entity)
         {
             context.Set<TEntity>().Remove(entity);
-        }
-
-        public List<TEntity> GetAll()
-        {
-            return context.Set<TEntity>().ToList();
         }
 
         public TEntity GetById(int id)
