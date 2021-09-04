@@ -1,10 +1,10 @@
 
 -------------------------BACKEND----------------------
 -profil sayfası
+-ödeme yöntemi aktifleştir.
 -model config fluent apilerin düzenlenmesi ve türkçeleştirilmesi
 -navbar linkleri ekle ve düzenle
 -harita ekle ve yerini göster.
--ödeme yöntemi aktifleştir.
 -ürünlerin özelliğine göre artan veya azalan sıralama ekle
 -ürün filtresi ekle
 
