@@ -1,3 +1,12 @@
+
+core.business/bin/
+core.business/obj/
+core.entity/bin/
+core.entity/obj/
+core.data/bin/
+core.data/obj/
+core.webui/bin/
+core.webui/obj/
 core.business/bin/Debug/net5.0/core.business.dll
 core.business/bin/Debug/net5.0/core.business.pdb
 core.business/bin/Debug/net5.0/core.data.dll
@@ -31,3 +40,5 @@ core.webui/obj/Debug/net5.0/ref/core.webui.dll
 core.entity/obj/Debug/net5.0/core.entity.csproj.AssemblyReference.cache
 core.data/obj/Debug/net5.0/core.data.csproj.AssemblyReference.cache
 core.business/obj/Debug/net5.0/core.business.csproj.AssemblyReference.cache
+core.webui/bin/Debug/net5.0/core.webui.Views.dll
+core.webui/bin/Debug/net5.0/core.webui.Views.pdb
