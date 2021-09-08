@@ -15,6 +15,7 @@ namespace core.webui.Models
 
         [Required]
         [DataType(DataType.Password)]
+        [RegularExpression(@"^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{6,}$", ErrorMessage = "Şifreniz en az 6 karakter uzunluğunda, en az 1 büyük, küçük harf ve rakam içermelidir. ")]
         public string Password { get; set; }
 
         [Required]
