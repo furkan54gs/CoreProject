@@ -1,10 +1,10 @@
 
 -------------------------BACKEND----------------------
--model sütun eklemeleri, fluent apilerin düzenlenmesi ve türkçeleştirilmesi (comment modeli ekle)
--profil sayfası
+-fluent apilerin düzenlenmesi ve türkçeleştirilmesi (comment modeli ekle) ^^
+-profil sayfası oluştur ve adres kısmını tümü için ekle
 -ürünler için yorum bölümü
--category url oto oluşsun
--stocktan fazla sipariş verilmesin
+-category url oto oluşsun   ^^
+-ürün sayfasında stocktan fazla sipariş verilmesin
 -ödeme yöntemi aktifleştir
 -navbar linkleri ekle ve düzenle
 -bread crump

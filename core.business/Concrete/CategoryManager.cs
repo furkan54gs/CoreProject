@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using core.business.Abstract;
+using core.business.Extensions;
 using core.data.Abstract;
 using core.entity;
 
@@ -17,6 +18,7 @@ namespace core.business.Concrete
 
         public void Create(Category entity)
         {
+             entity.Url= Replacements.ConvertUrl(entity.Url);
             _unitofwork.Categories.Create(entity);
             _unitofwork.Save();
         }
