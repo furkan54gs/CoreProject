@@ -1,0 +1,10 @@
+
+core.business/bin/
+core.business/obj/
+core.entity/bin/
+core.entity/obj/
+core.data/bin/
+core.data/obj/
+core.webui/bin/
+core.webui/obj/
+core.webui/node_modules/
