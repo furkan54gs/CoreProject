@@ -12,32 +12,40 @@ namespace core.business.Concrete
             _unitofwork = unitofwork;
         }
 
-        public void AddToCart(string userId, int productId, int quantity)
+        public bool AddToCart(string userId, int productId, int quantity)
         {
             var cart = GetCartByUserId(userId);
 
-            if(cart!=null)
+            var product = _unitofwork.Products.GetById(productId);
+
+            if (product.Stock > quantity)
             {
-                // eklenmek isteyen ürün sepette varmı (güncelleme)
-                // eklenmek isteyen ürün sepette var ve yeni kayıt oluştur. (kayıt ekleme)
-
-                var index = cart.CartItems.FindIndex(i=>i.ProductId==productId);
-                if(index<0)
+                if (cart != null)
                 {
-                    cart.CartItems.Add(new CartItem(){
-                        ProductId = productId,
-                        Quantity = quantity,
-                        CartId = cart.Id
-                    });
-                }
-                else{
-                    cart.CartItems[index].Quantity += quantity;
-                }
+                    // eklenmek isteyen ürün sepette varmı (güncelleme)
+                    // eklenmek isteyen ürün sepette var ve yeni kayıt oluştur. (kayıt ekleme)
 
-                _unitofwork.Carts.Update(cart);
-                _unitofwork.Save();
+                    var index = cart.CartItems.FindIndex(i => i.ProductId == productId);
+                    if (index < 0)
+                    {
+                        cart.CartItems.Add(new CartItem()
+                        {
+                            ProductId = productId,
+                            Quantity = quantity,
+                            CartId = cart.Id
+                        });
+                    }
+                    else
+                    {
+                        cart.CartItems[index].Quantity += quantity;
+                    }
 
+                    _unitofwork.Carts.Update(cart);
+                    _unitofwork.Save();
+                    return true;
+                }
             }
+            return false;
         }
 
         public void ClearCart(int cartId)
@@ -48,9 +56,9 @@ namespace core.business.Concrete
         public void DeleteFromCart(string userId, int productId)
         {
             var cart = GetCartByUserId(userId);
-            if(cart!=null)
+            if (cart != null)
             {
-                _unitofwork.Carts.DeleteFromCart(cart.Id,productId);
+                _unitofwork.Carts.DeleteFromCart(cart.Id, productId);
             }
         }
 
@@ -61,7 +69,7 @@ namespace core.business.Concrete
 
         public void InitializeCart(string userId)
         {
-            _unitofwork.Carts.Create(new Cart(){UserId = userId});
+            _unitofwork.Carts.Create(new Cart() { UserId = userId });
             _unitofwork.Save();
         }
     }

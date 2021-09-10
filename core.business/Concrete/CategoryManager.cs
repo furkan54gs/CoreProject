@@ -18,7 +18,7 @@ namespace core.business.Concrete
 
         public void Create(Category entity)
         {
-             entity.Url= Replacements.ConvertUrl(entity.Url);
+             entity.Url= Replacements.ConvertUrl(entity.Name);
             _unitofwork.Categories.Create(entity);
             _unitofwork.Save();
         }

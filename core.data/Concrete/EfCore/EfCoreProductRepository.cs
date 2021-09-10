@@ -90,7 +90,7 @@ namespace core.data.Concrete.EfCore
                 }
             }
 
-            return products.Skip((page - 1) * pageSize).Take(pageSize).ToList();
+            return products.OrderBy(i => i.Name).Skip((page - 1) * pageSize).Take(pageSize).ToList();
         }
         public List<Product> GetSearchResult(string searchString)
         {
@@ -113,6 +113,7 @@ namespace core.data.Concrete.EfCore
             {
                 product.Name = entity.Name;
                 product.Price = entity.Price;
+                product.Stock = entity.Stock;
                 product.Description = entity.Description;
                 product.Url = entity.Url;
                 product.ImageUrl = entity.ImageUrl;

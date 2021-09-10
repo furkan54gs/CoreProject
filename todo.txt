@@ -4,7 +4,8 @@
 -profil sayfası oluştur ve adres kısmını tümü için ekle
 -ürünler için yorum bölümü
 -category url oto oluşsun   ^^
--ürün sayfasında stocktan fazla sipariş verilmesin
+-product url oto oluşsun
+-ürün sayfasında stocktan fazla sipariş verilmesin ^^
 -ödeme yöntemi aktifleştir
 -navbar linkleri ekle ve düzenle
 -bread crump
@@ -30,3 +31,4 @@
 -------------------------HATIRLATMALAR----------------
 !program içindeki detaylı hata gösterimi açık
 !eposta ayarları yapılı değil
+!vscode debug build işlemi devre dışı bırakıldı

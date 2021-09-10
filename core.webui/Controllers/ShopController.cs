@@ -19,7 +19,7 @@ namespace core.webui.Controllers
         //   localhost/products/telefon?page=1
         public IActionResult List(string category, int page = 1)
         {
-            const int pageSize = 2;
+            const int pageSize = 3;
 
             var productViewModel = new ProductListViewModel()
             {

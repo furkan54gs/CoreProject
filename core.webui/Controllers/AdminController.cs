@@ -220,6 +220,7 @@ namespace core.webui.Controllers
                     Name = model.Name,
                     Url = model.Url,
                     Price = model.Price,
+                    Stock = model.Stock,
                     Description = model.Description,
                     ImageUrl = model.ImageUrl
                 };
@@ -258,7 +259,6 @@ namespace core.webui.Controllers
                 var entity = new Category()
                 {
                     Name = model.Name,
-                    Url = model.Url
                 };
 
                 _categoryService.Create(entity);
@@ -294,6 +294,7 @@ namespace core.webui.Controllers
                 Name = entity.Name,
                 Url = entity.Url,
                 Price = entity.Price,
+                Stock = entity.Stock,
                 ImageUrl = entity.ImageUrl,
                 Description = entity.Description,
                 IsApproved = entity.IsApproved,

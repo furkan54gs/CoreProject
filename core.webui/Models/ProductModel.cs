@@ -19,6 +19,7 @@ namespace core.webui.Models
         // [Required(ErrorMessage="Price zorunlu bir alan.")]
         [Range(1,100000,ErrorMessage="Ücret için 1-100000 arasında değer girmelisiniz.")]
         public double? Price { get; set; }
+        public int Stock { get; set; }
 
         [Required(ErrorMessage="Description zorunlu bir alan.")]
         [StringLength(100,MinimumLength=5,ErrorMessage="Description 5-100 karakter aralığında olmalıdır.")]

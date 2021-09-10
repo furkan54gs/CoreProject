@@ -133,17 +133,19 @@ namespace core.webui
                     defaults: new { controller = "Cart", action = "Index" }
                 );
 
-                endpoints.MapControllerRoute(
-                   name: "adminuseredit",
-                   pattern: "admin/user/{id?}",
-                   defaults: new { controller = "Admin", action = "UserEdit" }
-                );
 
                 endpoints.MapControllerRoute(
                    name: "adminusers",
                    pattern: "admin/user/list",
                    defaults: new { controller = "Admin", action = "UserList" }
                 );
+
+                endpoints.MapControllerRoute(
+                   name: "adminuseredit",
+                   pattern: "admin/user/{id?}",
+                   defaults: new { controller = "Admin", action = "UserEdit" }
+                );
+
 
                 endpoints.MapControllerRoute(
                     name: "adminroles",
@@ -204,19 +206,19 @@ namespace core.webui
                 endpoints.MapControllerRoute(
                     name: "search",
                     pattern: "search",
-                    defaults: new { controller = "Shop", action = "search" }
+                    defaults: new { controller = "Shop", action = "Search" }
                 );
 
                 endpoints.MapControllerRoute(
                     name: "productdetails",
                     pattern: "{url}",
-                    defaults: new { controller = "Shop", action = "details" }
+                    defaults: new { controller = "Shop", action = "Details" }
                 );
 
                 endpoints.MapControllerRoute(
                     name: "productsbycategories",
                     pattern: "products/{category?}",
-                    defaults: new { controller = "Shop", action = "list" }
+                    defaults: new { controller = "Shop", action = "List" }
                 );
 
                 endpoints.MapControllerRoute(

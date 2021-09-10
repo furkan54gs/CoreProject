@@ -6,6 +6,7 @@
         @await Component.InvokeAsync("Categories")
     </div>
     <div class="col-md-9">
+        @await Html.PartialAsync("_orderby")
         <div class="row">
             @foreach (var product in Model.Products)
             {
@@ -41,7 +42,6 @@
 
 
                         }
-
 
                     </ul>
                 </nav>
