@@ -133,6 +133,11 @@ namespace core.webui
                     defaults: new { controller = "Cart", action = "Index" }
                 );
 
+                endpoints.MapControllerRoute(
+                    name: "accountmanage",
+                    pattern: "account/manage",
+                    defaults: new { controller = "Account", action = "Manage" }
+                );
 
                 endpoints.MapControllerRoute(
                    name: "adminusers",

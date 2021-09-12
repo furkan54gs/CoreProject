@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using core.business.Abstract;
+using core.business.Extensions;
 using core.data.Abstract;
 using core.data.Concrete.EfCore;
 using core.entity;
@@ -19,6 +20,7 @@ namespace core.business.Concrete
         {
             if (Validation(entity))
             {
+                entity.Url=Replacements.ConvertUrl(entity.Name);
                 _unitofwork.Products.Create(entity);
                 _unitofwork.Save();
                 return true;

@@ -90,7 +90,7 @@ namespace core.data.Concrete.EfCore
                 }
             }
 
-            return products.OrderBy(i => i.Name).Skip((page - 1) * pageSize).Take(pageSize).ToList();
+            return products.OrderBy(i => i.ProductId).Skip((page - 1) * pageSize).Take(pageSize).ToList();
         }
         public List<Product> GetSearchResult(string searchString)
         {

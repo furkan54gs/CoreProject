@@ -13,7 +13,7 @@ namespace core.webui.Models
         [StringLength(60,MinimumLength=5,ErrorMessage="Ürün ismi 5-10 karakter aralığında olmalıdır.")]
         public string Name { get; set; }
 
-        [Required(ErrorMessage="Url zorunlu bir alan.")]
+        // [Required(ErrorMessage="Url zorunlu bir alan.")]
         public string Url { get; set; }
 
         // [Required(ErrorMessage="Price zorunlu bir alan.")]
@@ -22,7 +22,7 @@ namespace core.webui.Models
         public int Stock { get; set; }
 
         [Required(ErrorMessage="Description zorunlu bir alan.")]
-        [StringLength(100,MinimumLength=5,ErrorMessage="Description 5-100 karakter aralığında olmalıdır.")]
+        [StringLength(200,MinimumLength=5,ErrorMessage="Description 5-200 karakter aralığında olmalıdır.")]
         public string Description { get; set; }
 
         [Required(ErrorMessage="ImageUrl zorunlu bir alan.")]

@@ -52,6 +52,8 @@ namespace core.webui.Controllers
                     UserName = user.UserName,
                     FirstName = user.FirstName,
                     LastName = user.LastName,
+                    Address = user.Address,
+                    City = user.City,
                     Email = user.Email,
                     EmailConfirmed = user.EmailConfirmed,
                     SelectedRoles = selectedRoles
@@ -72,6 +74,8 @@ namespace core.webui.Controllers
                     user.FirstName = model.FirstName;
                     user.LastName = model.LastName;
                     user.UserName = model.UserName;
+                    user.Address = model.Address;
+                    user.City = model.City;
                     user.Email = model.Email;
                     user.EmailConfirmed = model.EmailConfirmed;
 
