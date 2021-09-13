@@ -73,7 +73,7 @@ namespace core.data.Concrete.EfCore
                             .FirstOrDefault();
 
         }
-        public List<Product> GetProductsByCategory(string name, int page, int pageSize)
+        public List<Product> GetProductsByCategory(string name, string orderby, int page, int pageSize)
         {
             var products = CoreContext
                 .Products
@@ -90,7 +90,28 @@ namespace core.data.Concrete.EfCore
                 }
             }
 
-            return products.OrderBy(i => i.ProductId).Skip((page - 1) * pageSize).Take(pageSize).ToList();
+            switch (orderby)
+            {
+                case "pricedesc":
+                    return products.OrderByDescending(i => i.Price).Skip((page - 1) * pageSize).Take(pageSize).ToList();
+
+
+                case "priceasc":
+                    return products.OrderBy(i => i.Price).Skip((page - 1) * pageSize).Take(pageSize).ToList();
+
+
+                case "rate":
+                    return products.OrderByDescending(i => i.Rate).Skip((page - 1) * pageSize).Take(pageSize).ToList();
+
+
+                case "date":
+                    return products.OrderByDescending(i => i.DateAdded).Skip((page - 1) * pageSize).Take(pageSize).ToList();
+
+                default:
+                    return products.OrderBy(i => i.ProductId).Skip((page - 1) * pageSize).Take(pageSize).ToList();
+
+            }
+
         }
         public List<Product> GetSearchResult(string searchString)
         {
@@ -113,6 +134,7 @@ namespace core.data.Concrete.EfCore
             {
                 product.Name = entity.Name;
                 product.Price = entity.Price;
+                product.Rate = entity.Rate;
                 product.Stock = entity.Stock;
                 product.Description = entity.Description;
                 product.Url = entity.Url;

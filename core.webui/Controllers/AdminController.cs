@@ -224,6 +224,7 @@ namespace core.webui.Controllers
                     Name = model.Name,
                     Url = model.Url,
                     Price = model.Price,
+                    Rate = 0,
                     Stock = model.Stock,
                     Description = model.Description,
                     ImageUrl = model.ImageUrl
@@ -298,6 +299,7 @@ namespace core.webui.Controllers
                 Name = entity.Name,
                 Url = entity.Url,
                 Price = entity.Price,
+                Rate = entity.Rate,
                 Stock = entity.Stock,
                 ImageUrl = entity.ImageUrl,
                 Description = entity.Description,
@@ -323,6 +325,7 @@ namespace core.webui.Controllers
                 }
                 entity.Name = model.Name;
                 entity.Price = model.Price;
+                entity.Rate = model.Rate;
                 entity.Url = model.Url;
                 entity.Description = model.Description;
                 entity.IsHome = model.IsHome;

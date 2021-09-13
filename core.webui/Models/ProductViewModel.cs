@@ -10,6 +10,7 @@ namespace core.webui.Models
         public int ItemsPerPage { get; set; }
         public int CurrentPage { get; set; }
         public string CurrentCategory { get; set; }
+        public string CurrentOrderBy { get; set; }
 
         public int TotalPages()
         {

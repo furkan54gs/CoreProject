@@ -1,8 +1,10 @@
 
 -------------------------BACKEND----------------------
 -fluent apilerin düzenlenmesi ve türkçeleştirilmesi (comment modeli ekle) ^^
--profil sayfası oluştur ^^ (edit ekle) ve adres kısmını tümü için ekle ^^
+-profil sayfası oluştur ^^  ve adres kısmını tümü için ekle ^^ (edit ekle)
 -ürünler için yorum bölümü
+-ürünler için slider ve çoklu foto
+-ürün eklendiğinde rate 0 eklensin, orderda rate güncellensin
 -category url oto oluşsun   ^^
 -product url oto oluşsun    ^^
 -ürün sayfasında stocktan fazla sipariş verilmesin  ^^
@@ -10,8 +12,9 @@
 -navbar linkleri ekle ve düzenle
 -bread crump
 -harita ekle ve yerini göster
--ürünlerin özelliğine göre artan veya azalan sıralama ekle
+-ürünlerin özelliğine göre artan veya azalan sıralama ekle ^^
 -ürün filtresi ekle
+-anasayfa carousel
 
 
 
@@ -26,6 +29,7 @@
 *category amazon arayüzüne benzer yapı
 *category subtree
 *seo uyunmluluğu
+*discount sistemi
 
 
 -------------------------HATIRLATMALAR----------------

@@ -8,7 +8,7 @@ namespace core.business.Abstract
         Product GetById(int id);
         Product GetByIdWithCategories(int id);
         Product GetProductDetails(string url);
-        List<Product> GetProductsByCategory(string name, int page, int pageSize);
+        List<Product> GetProductsByCategory(string name, string orderby, int page, int pageSize);
         int GetCountByCategory(string category);
         int GetCountByApproved(bool isApproved);
         List<Product> GetHomePageProducts();

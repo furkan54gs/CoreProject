@@ -222,7 +222,7 @@ namespace core.webui
 
                 endpoints.MapControllerRoute(
                     name: "productsbycategories",
-                    pattern: "products/{category?}",
+                    pattern: "products/{category?}/{orderby?}",
                     defaults: new { controller = "Shop", action = "List" }
                 );
 

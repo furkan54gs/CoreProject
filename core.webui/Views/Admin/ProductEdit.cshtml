@@ -41,10 +41,17 @@
                     <span asp-validation-for="Price" class="text-danger"></span>
                 </div>
             </div>
+             <div class="form-group row">
+                <label asp-for="Rate" class="col-sm-2 col-form-label"></label>
+                <div class="col-sm-10">
+                    <input class="form-control" asp-for="Rate">
+                    <span asp-validation-for="Rate" class="text-danger"></span>
+                </div>
+            </div>
               <div class="form-group row">
                 <label asp-for="Stock" class="col-sm-2 col-form-label"></label>
                 <div class="col-sm-10">
-                    <input type="number" class="form-control" asp-for="Stock" value="@Model.Stock">
+                    <input type="number" class="form-control" asp-for="Stock">
                     <span asp-validation-for="Stock" class="text-danger"></span>
                 </div>
             </div>

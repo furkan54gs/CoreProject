@@ -1,14 +1,15 @@
-
+@model PageInfo
 <div class="row">
     <div class="col-md-12">
         <div class="dropdown w-25 ms-auto my-2">
             <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                Sıralama..
+                Sırala..
             </button>
             <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                <li><a class="dropdown-item" href="#">Fiyat (Azalan)</a></li>
-                <li><a class="dropdown-item" href="#">Fiyat (Artan)</a></li>
-                <li><a class="dropdown-item" href="#">Eklenme Tarihi</a></li>
+                <li><a class="dropdown-item" href="/products/@Model.CurrentCategory?orderby=pricedesc">Fiyat (Azalan)</a></li>
+                <li><a class="dropdown-item" href="/products/@Model.CurrentCategory?orderby=priceasc">Fiyat (Artan)</a></li>
+                <li><a class="dropdown-item" href="/products/@Model.CurrentCategory?orderby=rate">Puan</a></li>
+                <li><a class="dropdown-item" href="/products/@Model.CurrentCategory?orderby=date">En Yeni</a></li>
             </ul>
         </div>
     </div>

@@ -68,9 +68,9 @@ namespace core.business.Concrete
             return _unitofwork.Products.GetProductDetails(url);
         }
 
-        public List<Product> GetProductsByCategory(string name, int page, int pageSize)
+        public List<Product> GetProductsByCategory(string name, string orderby, int page, int pageSize)
         {
-            return _unitofwork.Products.GetProductsByCategory(name, page, pageSize);
+            return _unitofwork.Products.GetProductsByCategory(name,orderby, page, pageSize);
         }
 
         public List<Product> GetSearchResult(string searchString)

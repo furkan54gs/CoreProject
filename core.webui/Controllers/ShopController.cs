@@ -17,19 +17,20 @@ namespace core.webui.Controllers
 
 
         //   localhost/products/telefon?page=1
-        public IActionResult List(string category, int page = 1)
+        public IActionResult List(string category,string orderby, int page = 1)
         {
             const int pageSize = 3;
 
             var productViewModel = new ProductListViewModel()
             {
-                Products = _productService.GetProductsByCategory(category, page, pageSize),
+                Products = _productService.GetProductsByCategory(category,orderby, page, pageSize),
                 PageInfo = new PageInfo()
                 {
                     TotalItems = (category == "list") ? _productService.GetCountByApproved(true) : _productService.GetCountByCategory(category),
                     CurrentPage = page,
                     ItemsPerPage = pageSize,
-                    CurrentCategory = category
+                    CurrentCategory = category,
+                    CurrentOrderBy = orderby
                 }
 
             };

@@ -3,15 +3,15 @@ using core.entity;
 
 namespace core.data.Abstract
 {
-    public interface IProductRepository: IRepository<Product>
+    public interface IProductRepository : IRepository<Product>
     {
-       Product GetProductDetails(string url);
-       Product GetByIdWithCategories(int id);
-       List<Product> GetProductsByCategory(string name,int page,int pageSize);
-       List<Product> GetSearchResult(string searchString);
-       List<Product> GetHomePageProducts();
-       int GetCountByCategory(string category);
-       void Update(Product entity, int[] categoryIds);
-       int GetCountByApproved(bool isApproved);
+        Product GetProductDetails(string url);
+        Product GetByIdWithCategories(int id);
+        List<Product> GetProductsByCategory(string name, string orderby, int page, int pageSize);
+        List<Product> GetSearchResult(string searchString);
+        List<Product> GetHomePageProducts();
+        int GetCountByCategory(string category);
+        void Update(Product entity, int[] categoryIds);
+        int GetCountByApproved(bool isApproved);
     }
 }
