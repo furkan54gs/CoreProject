@@ -19,6 +19,8 @@ using core.data.Concrete.EfCore;
 using core.webui.EmailServices;
 using core.webui.Identity;
 using Pomelo.EntityFrameworkCore;
+using Stripe;
+using core.webui.Extensions;
 
 namespace core.webui
 {
@@ -90,6 +92,8 @@ namespace core.webui
                      _configuration["EmailSender:Password"])
                 );
             services.AddControllersWithViews();
+
+            services.Configure<StripeSettings>(_configuration.GetSection("Stripe"));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -104,6 +108,8 @@ namespace core.webui
                 RequestPath = "/modules"      //set a call name.ex: in layout href="modules/bootstrap"
             });
 
+            StripeConfiguration.ApiKey = _configuration["Stripe:SecretKey"];
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -115,6 +121,18 @@ namespace core.webui
 
             app.UseEndpoints(endpoints =>
             {
+                endpoints.MapControllerRoute(
+                    name: "success",
+                    pattern: "success",
+                    defaults: new { controller = "Cart", action = "Success" }
+                );
+
+                endpoints.MapControllerRoute(
+                    name: "payment",
+                    pattern: "payment",
+                    defaults: new { controller = "Cart", action = "Payment" }
+                );
+
                 endpoints.MapControllerRoute(
                     name: "orders",
                     pattern: "orders",

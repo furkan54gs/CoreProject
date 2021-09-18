@@ -1,0 +1,263 @@
+@using Microsoft.Extensions.Options
+@inject IOptions<StripeSettings> Stripe
+
+
+@section Css{
+<link rel="stylesheet" href="~/css/global.css" />
+}
+
+
+@{
+    OrderModel cart = TempData.Get<OrderModel>("cart");
+}
+
+
+<h1>Ödeme</h1>
+<hr>
+<div class="row">
+    <div class="col-md-8">
+        <h4 class="mb-3">Sipariş Detayı</h4>
+        <form id="cartmodel">
+            <input type="hidden" name="cartId" value="0">
+            <div class="row mb-3">
+                <div class="col-md-6">
+                    <label asp-for="@cart.FirstName"></label>
+                    <input asp-for="@cart.FirstName" class="form-control" disabled>
+                </div>
+                <div class="col-md-6">
+                    <label asp-for="@cart.LastName"></label>
+                    <input asp-for="@cart.LastName" class="form-control" disabled>
+                </div>
+            </div>
+            <div class="mb-3">
+                <label asp-for="@cart.Address"></label>
+                <textarea asp-for="@cart.Address" class="form-control" disabled></textarea>
+            </div>
+            <div class="row mb-3">
+                <div class="col-md-3">
+                    <label asp-for="@cart.City"></label>
+                    <input asp-for="@cart.City" class="form-control" disabled>
+                </div>
+                <div class="col-md-4">
+                    <label asp-for="@cart.Phone"></label>
+                    <input asp-for="@cart.Phone" class="form-control" disabled>
+                </div>
+                <div class="col-md-5">
+                    <label asp-for="@cart.Email"></label>
+                    <input asp-for="@cart.Email" class="form-control" disabled>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="col-md-4">
+        <h4 class="mb-3">
+            <span>Ürünler</span>
+        </h4>
+        <ul class="list-group mb-3">
+
+            @foreach (var item in cart.CartModel.CartItems)
+            {
+                <li class="list-group-item d-flex justify-content-between">
+                    <div>
+                        <h6>@item.Name - @item.Quantity Adet</h6>
+                    </div>
+                    <span class="text-muted">@item.Price.ToString("c")</span>
+                </li>
+                <li class="list-group-item d-flex justify-content-between">
+                    <div>
+                        <h6></h6>
+                    </div>
+                </li>
+            }
+
+            <li class="list-group-item d-flex justify-content-between">
+                <h5><span>Toplam</span></h5>
+                <strong>@cart.CartModel.TotalPrice().ToString("c")</strong>
+            </li>
+        </ul>
+
+    </div>
+</div>
+
+
+
+
+
+
+<form id="payment-form">
+    <input type="text" id="cname" placeholder="Kartın üzerindeki ad ve soyad" />
+    <div id="card-element">
+        <!--Stripe.js injects the Card Element-->
+    </div>
+    <button id="submit">
+        <div class="spinner hidden" id="spinner"></div>
+        <span id="button-text">Ödemeyi Tamamla</span>
+    </button>
+    <p id="card-error" role="alert"></p>
+    <p class="result-message hidden">
+        Ödeme Başarılı!
+        <a href="" target="_blank">Stripe dashboard.</a> Refresh the page to pay again.
+    </p>
+</form>
+
+
+@section Scripts{
+
+<script src="https://js.stripe.com/v3/"></script>
+<script src="https://polyfill.io/v3/polyfill.min.js?version=3.52.1&features=fetch"></script>
+<script>
+    // A reference to Stripe.js initialized with your real test publishable API key.
+    var stripe = Stripe('@Stripe.Value.PublishableKey');
+
+    // The items the customer wants to buy
+    var cart = {
+        items: [{
+            firstName: "@cart.FirstName",
+            lastName: "@cart.LastName",
+            city: "@cart.City",
+            address: "@cart.Address",
+            email: "@cart.Email",
+            phone: "@cart.Phone"
+        }]
+    };
+
+    // Disable the button until we have Stripe set up on the page
+    document.querySelector("button").disabled = true;
+    fetch("/api", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(cart)
+    })
+        .then(function (result) {
+            return result.json();
+        })
+        .then(function (data) {
+            var elements = stripe.elements();
+
+            var style = {
+                base: {
+                    color: "#32325d",
+                    fontFamily: 'Arial, sans-serif',
+                    fontSmoothing: "antialiased",
+                    fontSize: "16px",
+                    "::placeholder": {
+                        color: "#32325d"
+                    }
+                },
+                invalid: {
+                    fontFamily: 'Arial, sans-serif',
+                    color: "#fa755a",
+                    iconColor: "#fa755a"
+                }
+            };
+
+            var card = elements.create("card", { style: style });
+            // Stripe injects an iframe into the DOM
+            card.mount("#card-element");
+
+            card.on("change", function (event) {
+                // Disable the Pay button if there are no card details in the Element
+                document.querySelector("button").disabled = event.empty;
+                document.querySelector("#card-error").textContent = event.error ? event.error.message : "";
+            });
+
+            var form = document.getElementById("payment-form");
+            form.addEventListener("submit", function (event) {
+                event.preventDefault();
+                // Complete payment when the submit button is clicked
+                payWithCard(stripe, card, data.clientSecret);
+            });
+        });
+
+    // Calls stripe.confirmCardPayment
+    // If the card requires authentication Stripe shows a pop-up modal to
+    // prompt the user to enter authentication details without leaving your page.
+    var payWithCard = function (stripe, card, clientSecret) {
+        loading(true);
+        stripe
+            .confirmCardPayment(clientSecret, {
+                receipt_email: document.getElementById('cart_Email').value,
+                payment_method: {
+                    card: card
+                },
+            })
+            .then(function (result) {
+                if (result.error) {
+                    // Show error to your customer
+                    showError(result.error.message);
+                } else {
+
+                    var Cmodel = {
+                        FirstName: "@cart.FirstName",
+                        LastName: "@cart.LastName",
+                        Address: "@cart.Address",
+                        City: "@cart.City",
+                        Phone: "@cart.Phone",
+                        Note: "@cart.Note",
+                        Email: "@cart.Email",
+                    };
+                    // var amountCheck="@cart.CartModel.TotalPrice()";
+                    var paymentId = result.paymentIntent.id;
+                    $.ajax({
+                        url: '/Cart/Success',
+                        type: 'POST',
+                        dataType: 'json',
+                        data: { Cmodel, paymentId },
+                        /*success: function (result) {
+                            console.log('Data received: ');
+                            console.log(result);
+                        }*/
+                    });
+                    // The payment succeeded!
+                    orderComplete(result.paymentIntent.id);
+
+                    setTimeout(function () {
+                        window.location.href = "/success";
+                    }, 800);
+                }
+            });
+    };
+
+    /* ------- UI helpers ------- */
+
+    // Shows a success message when the payment is complete
+    var orderComplete = function (paymentIntentId) {
+        loading(false);
+        document
+            .querySelector(".result-message a")
+            .setAttribute(
+                "href",
+                "https://dashboard.stripe.com/test/payments/" + paymentIntentId
+            );
+        document.querySelector(".result-message").classList.remove("hidden");
+        document.querySelector("button").disabled = true;
+    };
+
+    // Show the customer the error from Stripe if their card fails to charge
+    var showError = function (errorMsgText) {
+        loading(false);
+        var errorMsg = document.querySelector("#card-error");
+        errorMsg.textContent = errorMsgText;
+        setTimeout(function () {
+            errorMsg.textContent = "";
+        }, 4000);
+    };
+
+    // Show a spinner on payment submission
+    var loading = function (isLoading) {
+        if (isLoading) {
+            // Disable the button and show a spinner
+            document.querySelector("button").disabled = true;
+            document.querySelector("#spinner").classList.remove("hidden");
+            document.querySelector("#button-text").classList.add("hidden");
+        } else {
+            document.querySelector("button").disabled = false;
+            document.querySelector("#spinner").classList.add("hidden");
+            document.querySelector("#button-text").classList.remove("hidden");
+        }
+    };
+
+</script>
+}

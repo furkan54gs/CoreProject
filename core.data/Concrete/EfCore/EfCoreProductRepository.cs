@@ -123,6 +123,16 @@ namespace core.data.Concrete.EfCore
             return products.ToList();
         }
 
+        public void StockDecrease(int productId,int quantity)
+        {
+            var product = CoreContext.Products.Where(i => i.ProductId == productId).FirstOrDefault();
+
+            if (product != null)
+            {
+                product.Stock -= quantity;
+            }
+        }
+
         public void Update(Product entity, int[] categoryIds)
         {
             var product = CoreContext.Products

@@ -13,5 +13,6 @@ namespace core.data.Abstract
         int GetCountByCategory(string category);
         void Update(Product entity, int[] categoryIds);
         int GetCountByApproved(bool isApproved);
+        void StockDecrease(int productId, int quantity);
     }
 }

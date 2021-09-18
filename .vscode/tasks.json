@@ -1,18 +1,18 @@
 {
     "version": "2.0.0",
     "tasks": [
-        // {
-        //     "label": "build",
-        //     "command": "dotnet",
-        //     "type": "process",
-        //     "args": [
-        //         "build",
-        //         "${workspaceFolder}/core.webui/core.webui.csproj",
-        //         "/property:GenerateFullPaths=true",
-        //         "/consoleloggerparameters:NoSummary"
-        //     ],
-        //     "problemMatcher": "$msCompile"
-        // },
+        {
+            "label": "build",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "build",
+                "${workspaceFolder}/core.webui/core.webui.csproj",
+                "/property:GenerateFullPaths=true",
+                "/consoleloggerparameters:NoSummary"
+            ],
+            "problemMatcher": "$msCompile"
+        },
         {
             "label": "publish",
             "command": "dotnet",
@@ -37,6 +37,9 @@
                 "/consoleloggerparameters:NoSummary"
             ],
             "problemMatcher": "$msCompile"
+            // "options": {
+            //     "cwd": "${workspaceFolder}/core.webui/"
+            // }
         }
     ]
 }

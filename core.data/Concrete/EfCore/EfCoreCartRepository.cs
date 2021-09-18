@@ -16,6 +16,13 @@ namespace core.data.Concrete.EfCore
         {
             get {return context as CoreContext; }
         }
+
+        public double CalculateTotal(string userId)
+        {
+            Cart cart= GetByUserId(userId);
+            return((double)cart.CartItems.Select(i => (i.Product.Price) * i.Quantity).Sum());
+        }
+
         public void ClearCart(int cartId)
         {
                var cmd = @"delete from CartItems where CartId=@p0";

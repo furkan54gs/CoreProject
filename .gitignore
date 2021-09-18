@@ -8,3 +8,4 @@ core.data/obj/
 core.webui/bin/
 core.webui/obj/
 core.webui/node_modules/
+stripeSecretApiKey.txt

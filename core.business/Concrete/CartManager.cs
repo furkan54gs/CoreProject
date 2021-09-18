@@ -48,6 +48,11 @@ namespace core.business.Concrete
             return false;
         }
 
+        public double CalculateTotal(string userId)
+        {
+            return _unitofwork.Carts.CalculateTotal(userId);
+        }
+
         public void ClearCart(int cartId)
         {
             _unitofwork.Carts.ClearCart(cartId);

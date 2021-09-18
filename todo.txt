@@ -8,14 +8,14 @@
 -category url oto oluşsun   ^^
 -product url oto oluşsun    ^^
 -ürün sayfasında stocktan fazla sipariş verilmesin  ^^
--ödeme yöntemi aktifleştir
+-ödeme yöntemi aktifleştir ^^
 -navbar linkleri ekle ve düzenle
 -bread crump
 -harita ekle ve yerini göster
 -ürünlerin özelliğine göre artan veya azalan sıralama ekle ^^
 -ürün filtresi ekle
 -anasayfa carousel
-
+-order-> conversation id fazlalık
 
 
 --------------------------FRONTEND--------------------

@@ -20,7 +20,7 @@ namespace core.business.Concrete
         {
             if (Validation(entity))
             {
-                entity.Url=Replacements.ConvertUrl(entity.Name);
+                entity.Url = Replacements.ConvertUrl(entity.Name);
                 _unitofwork.Products.Create(entity);
                 _unitofwork.Save();
                 return true;
@@ -70,7 +70,7 @@ namespace core.business.Concrete
 
         public List<Product> GetProductsByCategory(string name, string orderby, int page, int pageSize)
         {
-            return _unitofwork.Products.GetProductsByCategory(name,orderby, page, pageSize);
+            return _unitofwork.Products.GetProductsByCategory(name, orderby, page, pageSize);
         }
 
         public List<Product> GetSearchResult(string searchString)
@@ -119,6 +119,12 @@ namespace core.business.Concrete
             }
 
             return isValid;
+        }
+
+        public void StockDecrease(int productId, int quantity)
+        {
+            _unitofwork.Products.StockDecrease(productId, quantity);
+            _unitofwork.Save();
         }
     }
 }

@@ -10,6 +10,9 @@ using core.entity;
 using core.webui.Identity;
 using core.webui.Models;
 using core.webui.Extensions;
+using System.Threading.Tasks;
+using System.IO;
+using Stripe;
 
 namespace core.webui.Controllers
 {
@@ -18,12 +21,14 @@ namespace core.webui.Controllers
     {
         private ICartService _cartService;
         private IOrderService _orderService;
+        private IProductService _productservice;
         private UserManager<User> _userManager;
-        public CartController(IOrderService orderService, ICartService cartService, UserManager<User> userManager)
+        public CartController(IOrderService orderService, ICartService cartService, IProductService productservice, UserManager<User> userManager)
         {
             _cartService = cartService;
             _orderService = orderService;
             _userManager = userManager;
+            _productservice = productservice;
         }
         public IActionResult Index()
         {
@@ -56,14 +61,14 @@ namespace core.webui.Controllers
             }
             else
             {
-                 TempData.Put("message", new AlertMessage()
+                TempData.Put("message", new AlertMessage()
                 {
-                    Title="Başarısız",
-                    Message="Stokta "+quantity+" ürün bulunmamaktadır.",
-                    AlertType="danger"
+                    Title = "Başarısız",
+                    Message = "Stokta " + quantity + "adet ürün bulunmamaktadır.",
+                    AlertType = "danger"
                 });
 
-                return Redirect("~/"+productUrl);
+                return Redirect("~/" + productUrl);
             }
 
 
@@ -77,25 +82,34 @@ namespace core.webui.Controllers
             return RedirectToAction("Index");
         }
 
-        public IActionResult Checkout()
+        public async Task<IActionResult> Checkout()
         {
+            var user = await _userManager.GetUserAsync(User);
             var cart = _cartService.GetCartByUserId(_userManager.GetUserId(User));
 
-            var orderModel = new OrderModel();
 
-            orderModel.CartModel = new CartModel()
+            var orderModel = new OrderModel()
             {
-                CartId = cart.Id,
-                CartItems = cart.CartItems.Select(i => new CartItemModel()
+                FirstName = user.FirstName,
+                LastName = user.LastName,
+                City = user.City,
+                Address = user.Address,
+                Phone = user.PhoneNumber,
+                Email = user.Email,
+                CartModel = new CartModel()
                 {
-                    CartItemId = i.Id,
-                    ProductId = i.ProductId,
-                    Name = i.Product.Name,
-                    Price = (double)i.Product.Price,
-                    ImageUrl = i.Product.ImageUrl,
-                    Quantity = i.Quantity
+                    CartId = cart.Id,
+                    CartItems = cart.CartItems.Select(i => new CartItemModel()
+                    {
+                        CartItemId = i.Id,
+                        ProductId = i.ProductId,
+                        Name = i.Product.Name,
+                        Price = (double)i.Product.Price,
+                        ImageUrl = i.Product.ImageUrl,
+                        Quantity = i.Quantity
 
-                }).ToList()
+                    }).ToList()
+                }
             };
 
             return View(orderModel);
@@ -106,8 +120,7 @@ namespace core.webui.Controllers
         {
             if (ModelState.IsValid)
             {
-                var userId = _userManager.GetUserId(User);
-                var cart = _cartService.GetCartByUserId(userId);
+                var cart = _cartService.GetCartByUserId(_userManager.GetUserId(User));
 
                 model.CartModel = new CartModel()
                 {
@@ -123,7 +136,7 @@ namespace core.webui.Controllers
                     }).ToList()
                 };
 
-                // var payment = PaymentProcess(model);
+
 
                 // if(payment.Status=="success")
                 // {
@@ -141,7 +154,10 @@ namespace core.webui.Controllers
                 //     TempData["message"] =  JsonConvert.SerializeObject(msg);
                 //     }
             }
-            return View(model);
+            var obj = JsonConvert.SerializeObject(model);
+            TempData["cart"] = obj;
+
+            return RedirectToAction("Payment");
         }
 
         public IActionResult GetOrders()
@@ -188,16 +204,16 @@ namespace core.webui.Controllers
             _cartService.ClearCart(cartId);
         }
 
-        private void SaveOrder(OrderModel model,/* Payment payment,*/ string userId)
+        private void SaveOrder(OrderModel model, string userId, string paymentId)
         {
-            var order = new Order();
+            var order = new entity.Order();
 
             order.OrderNumber = new Random().Next(111111, 999999).ToString();
             order.OrderState = EnumOrderState.completed;
             order.PaymentType = EnumPaymentType.CreditCard;
-            //    order.PaymentId = payment.PaymentId;
+            order.PaymentId = paymentId;
             //    order.ConversationId = payment.ConversationId;
-            order.OrderDate = new DateTime();
+            order.OrderDate = DateTime.Now;
             order.FirstName = model.FirstName;
             order.LastName = model.LastName;
             order.UserId = userId;
@@ -209,17 +225,43 @@ namespace core.webui.Controllers
 
             order.OrderItems = new List<entity.OrderItem>();
 
-            foreach (var item in model.CartModel.CartItems)
+            Cart cart = _cartService.GetCartByUserId(userId);
+
+            foreach (var item in cart.CartItems)
             {
                 var orderItem = new core.entity.OrderItem()
                 {
-                    Price = item.Price,
+                    Price = (double)item.Product.Price,
                     Quantity = item.Quantity,
                     ProductId = item.ProductId
                 };
+                _productservice.StockDecrease(item.ProductId,item.Quantity);
                 order.OrderItems.Add(orderItem);
             }
             _orderService.Create(order);
+        }
+
+
+        public IActionResult Success()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public void Success(OrderModel Cmodel, string paymentId)
+        {
+            string userId = _userManager.GetUserId(User);
+            var cart = _cartService.GetCartByUserId(userId);
+            SaveOrder(Cmodel, userId, paymentId);
+            ClearCart(cart.Id);
+            var msg = new AlertMessage()
+            {
+                Message = "Sipariş Tamamlandı",
+                AlertType = "success"
+            };
+
+            TempData["message"] = JsonConvert.SerializeObject(msg);
+
         }
         /*
                 private Payment PaymentProcess(OrderModel model)
@@ -304,6 +346,12 @@ namespace core.webui.Controllers
                 }
 
         */
+
+        public IActionResult Payment()
+        {
+
+            return View();
+        }
 
     }
 }
