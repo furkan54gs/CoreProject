@@ -82,6 +82,7 @@ namespace core.webui
             services.AddScoped<ICategoryService, CategoryManager>();
             services.AddScoped<ICartService, CartManager>();
             services.AddScoped<IOrderService, OrderManager>();
+            services.AddScoped<ICommentService, CommentManager>();
 
             services.AddScoped<IEmailSender, SmtpEmailSender>(i =>
                  new SmtpEmailSender(
@@ -121,6 +122,12 @@ namespace core.webui
 
             app.UseEndpoints(endpoints =>
             {
+                endpoints.MapControllerRoute(
+                    name: "rateitem",
+                    pattern: "orders/rate-it/{id?}",
+                    defaults: new { controller = "Cart", action = "Rate" }
+                );
+
                 endpoints.MapControllerRoute(
                     name: "success",
                     pattern: "success",

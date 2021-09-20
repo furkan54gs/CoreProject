@@ -15,7 +15,8 @@
 -ürünlerin özelliğine göre artan veya azalan sıralama ekle ^^
 -ürün filtresi ekle
 -anasayfa carousel
--order-> conversation id fazlalık
+-sipariş kontrolü ve orderstate hızlı değişim için admine özel sayfa ekle
+
 
 
 --------------------------FRONTEND--------------------
@@ -36,3 +37,4 @@
 !program içindeki detaylı hata gösterimi açık
 !eposta ayarları yapılı değil
 !vscode debug build işlemi devre dışı bırakıldı
+!order-> conversation id db'den kaldırıldı. iyzicoda sorun oluşturabilir

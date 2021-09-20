@@ -8,9 +8,10 @@
     <table class="table table-bordered table-sm mb-3">
         <thead class="bg-primary">
             <tr>
-                <td colspan="2">Order Id: #@order.OrderNumber</td>
-                <th>Price</th>
-                <th>Quantity</th>
+                <td colspan="2">Satış Id: #@order.OrderNumber</td>
+                <th>Fiyat</th>
+                <th>Adet</th>
+                <th>İşlem</th>
             </tr>
         </thead>
         <tbody>
@@ -23,12 +24,22 @@
                     </td>
                     <td>@orderItem.Price</td>
                     <td>@orderItem.Quantity</td>
+                    <td>
+                        @if (order.OrderState == EnumOrderState.delivered)
+                        {
+                             <a class="btn btn-info" href="/orders/rate-it/@orderItem.OrderItemId" aria-label="Comment"><i class="fa fa-comment"
+                        aria-hidden="true"></i>Yorum Yap</a>
+                        }
+
+                        <a class="btn btn-danger" href="/orders/cancel-it/@orderItem.OrderItemId" aria-label="Cancel"><i class="fa fa-times"
+                        aria-hidden="true"></i>İptal Et</a>
+                    </td>
                 </tr>
             }
         </tbody>
         <tfoot>
             <tr>
-                <td colspan="2">Customer Name</td>
+                <td colspan="3">Customer Name</td>
                 <td>@order.FirstName @order.LastName</td>
                 <td rowspan="6">Total: @order.TotalPrice().ToString("c")</td>
             </tr>

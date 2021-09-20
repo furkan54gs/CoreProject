@@ -1,5 +1,14 @@
 @model ProductDetailModel
-
+@section Css{
+<style>
+    .card-inner {
+        margin-left: 4rem;
+    }
+</style>
+}
+@{
+    int rating = (int)Math.Round((double)Model.Product.Rate);
+}
 <div class="row">
     <div class="col-md-3">
         <img src="~/img/@Model.Product.ImageUrl" class="img-fluid">
@@ -15,39 +24,100 @@
             }
 
             <div class="mb-3">
-                <h4 class="text-primary mb-3">
+                <h4 class="text-primary py-3">
                     <i class="fas fa-lira-sign"></i>@Model.Product.Price
                 </h4>
+                <div class="d-flex justify-content-start p-2">
+
+                    @for (var i = 0; i < rating; i++)
+                    {
+                        <i class="text-warning fa fa-star py-1"></i>
+                    }
+
+                    <cite class="px-2">(@Model.Product.TotalComment)</cite>
+                </div>
                 @if (Model.Product.Stock > 0)
                 {
-                    <form asp-controller="Cart" asp-action="AddToCart" method="POST" class="form-inline">
+                    <form asp-controller="Cart" asp-action="AddToCart" method="POST" class="form-inline my-2">
                         <input type="hidden" name="productId" value="@Model.Product.ProductId">
                         <input type="hidden" name="productUrl" value="@Model.Product.Url">
                         <div class="input-group mb-3">
                             <label class="col-sm-1 col-form-label col-form-label-sm"><b>Adet :</b> </label>
                             <input type="number" name="quantity" class="form-control me-2" value="1" min="1" step="1"
                             max="@Model.Product.Stock">
-                            <label class="col-sm-1 col-form-label col-form-label-sm"><b>Stokta :</b> </label>
-                            <input type="number" name="stock" class="form-control mx-3" value="@Model.Product.Stock"
-                            disabled>
-                            <div class="input-group-append mx-3">
-                                <button type="submit" class="btn btn-primary">
-                                    <i class="fas fa-cart-plus"></i>Add to Cart
-                                </button>
-                            </div>
+                        </div>
+                        <div>
+                            <p>
+                                Stoklarımızda @Model.Product.Stock adet ürün bulunmaktadır.
+                            </p>
+                        </div>
+                        <div class="input-group-append my-4">
+                            <button type="submit" class="btn btn-primary btn-lg">
+                                <i class="fas fa-cart-plus"></i>Sepete Ekle
+                            </button>
                         </div>
                     </form>
                 }
                 else
                 {
                     <div class="alert alert-warning" role="alert">
-                       Bu ürün şu anda stoklarımızda bulunmuyor !
+                        Bu ürün şu anda stoklarımızda bulunmuyor !
                     </div>
                 }
             </div>
     </div>
     <div class="row">
-        <div class="col-md-12 p-5">
+        <div class="col-md-8 p-5">
             <p class="p-3">@Html.Raw(Model.Product.Description)</p>
+            <hr>
         </div>
     </div>
+
+
+    <div class="row">
+        @if (Model.Comments != null && Model.Comments.Any())
+        {
+            <h4>Yorumlar</h4>
+            <hr>
+            <div class="container">
+                @foreach (var item in Model.Comments)
+                {
+                    @if (item.IsApproved == true)
+                    {
+                        <div class="card my-2">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-md-10">
+                                        <div>
+                                            <span class="d-flex justify-content-start"><strong>@item.Title</strong></span>
+                                        </div>
+                                        <div class="clearfix"></div>
+                                        <p>@item.Description</p>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <div class="d-flex justify-content-end">
+                                            <cite class="px-4">@item.DateAdded</cite>
+
+                                            @for (int i = 0; i < ((int)Math.Round((double)item.Rate)); i++)
+                                            {
+                                                <i class="text-warning fa fa-star pt-1"></i>
+                                            }
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                }
+            </div>
+        }
+        else
+        {
+            <div class="container text-center">
+                <p>Bu ürüne daha yorum yapılmamış.</p>
+            </div>
+            <hr>
+        }
+    </div>
+</div>

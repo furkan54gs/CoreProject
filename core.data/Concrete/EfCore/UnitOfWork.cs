@@ -14,6 +14,8 @@ namespace core.data.Concrete.EfCore
         private EfCoreCategoryRepository _categoryRepository;
         private EfCoreOrderRepository _orderRepository;
         private EfCoreProductRepository _productRepository;
+        private EfCoreCommentRepository _commentRepository;
+
 
         public ICartRepository Carts =>
             _cartRepository = _cartRepository ?? new EfCoreCartRepository(_context);
@@ -26,6 +28,9 @@ namespace core.data.Concrete.EfCore
 
         public IProductRepository Products =>
             _productRepository = _productRepository ?? new EfCoreProductRepository(_context);
+
+        public ICommentRepository Comments =>
+            _commentRepository = _commentRepository ?? new EfCoreCommentRepository(_context);
 
         public void Dispose()
         {

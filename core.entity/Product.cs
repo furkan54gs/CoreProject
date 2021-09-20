@@ -10,6 +10,8 @@ namespace core.entity
         public string Url { get; set; }
         public double? Price { get; set; }
         public double? Rate { get; set; }
+        public int TotalComment { get; set; }
+        public int TotalSale { get; set; }
         public string Description { get; set; }
         public int Stock { get; set; }
         public string ImageUrl { get; set; }

@@ -107,8 +107,11 @@ namespace core.data.Concrete.EfCore
                 case "date":
                     return products.OrderByDescending(i => i.DateAdded).Skip((page - 1) * pageSize).Take(pageSize).ToList();
 
+                case "totalsale":
+                    return products.OrderByDescending(i => i.TotalSale).Skip((page - 1) * pageSize).Take(pageSize).ToList();
+
                 default:
-                    return products.OrderBy(i => i.ProductId).Skip((page - 1) * pageSize).Take(pageSize).ToList();
+                    return products.OrderBy(i => i.Name).Skip((page - 1) * pageSize).Take(pageSize).ToList();
 
             }
 
@@ -123,13 +126,14 @@ namespace core.data.Concrete.EfCore
             return products.ToList();
         }
 
-        public void StockDecrease(int productId,int quantity)
+        public void StockDecrease(int productId, int quantity)
         {
             var product = CoreContext.Products.Where(i => i.ProductId == productId).FirstOrDefault();
 
             if (product != null)
             {
                 product.Stock -= quantity;
+                product.TotalSale += quantity;
             }
         }
 

@@ -18,7 +18,6 @@ namespace core.entity
         public string Email { get; set; }
         public string Note { get; set; }
         public string PaymentId { get; set; }
-        public string ConversationId { get; set; }
         public EnumPaymentType PaymentType { get; set; }
         public EnumOrderState OrderState { get; set; }
         public List<OrderItem> OrderItems { get; set; }
@@ -34,6 +33,9 @@ namespace core.entity
     {
         waiting=0,
         unpaid=1,
-        completed=2
+        completed=2,
+        delivered=3,
+        notdelivered=4,
+        cancelled=5
     }
 }

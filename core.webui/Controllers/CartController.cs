@@ -135,25 +135,8 @@ namespace core.webui.Controllers
                         Quantity = i.Quantity
                     }).ToList()
                 };
-
-
-
-                // if(payment.Status=="success")
-                // {
-                //     SaveOrder(model,payment,userId);
-                //     ClearCart(model.CartModel.CartId);
-                //     return View("Success");
-                // }else
-                // {
-                //     var msg = new AlertMessage()
-                //     {
-                //         Message = $"{payment.ErrorMessage}",
-                //         AlertType = "danger"
-                //     };
-
-                //     TempData["message"] =  JsonConvert.SerializeObject(msg);
-                //     }
             }
+
             var obj = JsonConvert.SerializeObject(model);
             TempData["cart"] = obj;
 
@@ -194,7 +177,6 @@ namespace core.webui.Controllers
 
                 orderListModel.Add(orderModel);
             }
-
 
             return View("Orders", orderListModel);
         }
@@ -263,7 +245,28 @@ namespace core.webui.Controllers
             TempData["message"] = JsonConvert.SerializeObject(msg);
 
         }
-        /*
+
+        public IActionResult Payment()
+        {
+            return View();
+        }
+
+
+        public IActionResult Rate(int itemId)
+        {
+            //dönen itemi döndür. view de foto ve ad kısmında göster. form inputları ekle ve post işlemini gerçekleştir.
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult Rate()
+        {
+            return View();
+        }
+
+
+
+  /*
                 private Payment PaymentProcess(OrderModel model)
                 {
                     Options options = new Options();
@@ -346,12 +349,6 @@ namespace core.webui.Controllers
                 }
 
         */
-
-        public IActionResult Payment()
-        {
-
-            return View();
-        }
 
     }
 }
