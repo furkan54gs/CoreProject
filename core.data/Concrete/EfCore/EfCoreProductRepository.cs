@@ -126,7 +126,7 @@ namespace core.data.Concrete.EfCore
             return products.ToList();
         }
 
-        public void StockDecrease(int productId, int quantity)
+        public void StockUpdate(int productId, int quantity)
         {
             var product = CoreContext.Products.Where(i => i.ProductId == productId).FirstOrDefault();
 
@@ -134,6 +134,25 @@ namespace core.data.Concrete.EfCore
             {
                 product.Stock -= quantity;
                 product.TotalSale += quantity;
+            }
+        }
+
+        public void CommentUpdate(int productId, double rate)
+        {
+            var product = CoreContext.Products.Where(i => i.ProductId == productId).FirstOrDefault();
+
+            if (product != null)
+            {
+                if (rate>5)
+                {
+                    rate=5;
+                }
+                product.TotalComment += 1;
+                product.Rate = (((product.TotalComment - 1) * product.Rate) + rate) / product.TotalComment;
+                if(product.Rate>5)
+                {
+                    product.Rate=5;
+                }
             }
         }
 

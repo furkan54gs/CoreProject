@@ -121,10 +121,17 @@ namespace core.business.Concrete
             return isValid;
         }
 
-        public void StockDecrease(int productId, int quantity)
+        public void StockUpdate(int productId, int quantity)
         {
-            _unitofwork.Products.StockDecrease(productId, quantity);
+            _unitofwork.Products.StockUpdate(productId, quantity);
             _unitofwork.Save();
         }
+
+        public void CommentUpdate(int productId, double rate)
+        {
+            _unitofwork.Products.CommentUpdate(productId, rate);
+            _unitofwork.Save();
+        }
+
     }
 }

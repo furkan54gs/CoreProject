@@ -40,6 +40,11 @@ namespace core.business.Concrete
             return _unitofwork.Comments.GetById(id);
         }
 
+        public List<Comment> GetComments(int productId)
+        {
+           return  _unitofwork.Comments.GetComments(productId);
+        }
+
         public void Update(Comment entity)
         {
             _unitofwork.Comments.Update(entity);

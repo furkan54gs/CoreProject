@@ -14,7 +14,8 @@ namespace core.business.Abstract
         List<Product> GetHomePageProducts();
         List<Product> GetSearchResult(string searchString);
         List<Product> GetAll();
-        void StockDecrease(int productId, int quantity);
+        void StockUpdate(int productId, int quantity);
+        void CommentUpdate(int productId, double rate);
         bool Create(Product entity);
         void Update(Product entity);
         void Delete(Product entity);

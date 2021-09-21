@@ -5,6 +5,7 @@ namespace core.business.Abstract
 {
     public interface ICommentService : IValidator<Comment>
     {
+        List<Comment> GetComments(int productId);
         Comment GetById(int id);
 
         List<Comment> GetAll();

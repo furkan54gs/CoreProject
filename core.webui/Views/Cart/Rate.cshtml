@@ -1,30 +1,86 @@
+@model ProductModel
+@section Css{
+<style>
+	.rate {
+		float: left;
+		height: 46px;
+		padding: 0 10px;
+	}
+
+	.rate:not(:checked)>input {
+		position: absolute;
+		top: -9999px;
+	}
+
+	.rate:not(:checked)>label {
+		float: right;
+		width: 1em;
+		overflow: hidden;
+		white-space: nowrap;
+		cursor: pointer;
+		font-size: 30px;
+		color: #ccc;
+	}
+
+	.rate:not(:checked)>label:before {
+		content: '★ ';
+	}
+
+	.rate>input:checked~label {
+		color: #ffc700;
+	}
+
+	.rate:not(:checked)>label:hover,
+	.rate:not(:checked)>label:hover~label {
+		color: #deb217;
+	}
+
+	.rate>input:checked+label:hover,
+	.rate>input:checked+label:hover~label,
+	.rate>input:checked~label:hover,
+	.rate>input:checked~label:hover~label,
+	.rate>label:hover~input:checked~label {
+		color: #c59b08;
+	}
+</style>
+}
 
 <div class="container">
 	<h2 class="text-center">Bootstrap 4 User Rating Form / Comment Form</h2>
-
 	<div class="card">
-	    <div class="card-body">
-	        <div class="row">
-        	    <div class="col-md-2">
-        	        <img src="https://image.ibb.co/jw55Ex/def_face.jpg" class="img img-rounded img-fluid"/>
-        	        <p class="text-secondary text-center">15 Minutes Ago</p>
-        	    </div>
-        	    <div class="col-md-10">
-        	        <p>
-        	            <a class="float-left" href="https://maniruzzaman-akash.blogspot.com/p/contact.html"><strong>Maniruzzaman Akash</strong></a>
-        	            <span class="float-right"><i class="text-warning fa fa-star"></i></span>
-                        <span class="float-right"><i class="text-warning fa fa-star"></i></span>
-        	            <span class="float-right"><i class="text-warning fa fa-star"></i></span>
-        	            <span class="float-right"><i class="text-warning fa fa-star"></i></span>
+		<div class="card-body">
+			<div class="row">
+				<div class="col-md-2">
+					<img src="~/img/@Model.ImageUrl" class="img img-rounded img-fluid" />
+					<p class="text-secondary text-center">@Model.Name</p>
+				</div>
+				<div class="col-md-10">
+					<form asp-controller="Cart" asp-action="Rate" method="POST">
+						<input name="ProductId" value="@Model.ProductId" hidden>
+						<p>
+						<div class="rate">
+							<input type="radio" id="star5" name="Rate" value="5" />
+							<label for="star5" title="text">5 stars</label>
+							<input type="radio" id="star4" name="Rate" value="4" />
+							<label for="star4" title="text">4 stars</label>
+							<input type="radio" id="star3" name="Rate" value="3" />
+							<label for="star3" title="text">3 stars</label>
+							<input type="radio" id="star2" name="Rate" value="2" />
+							<label for="star2" title="text">2 stars</label>
+							<input type="radio" id="star1" name="Rate" value="1" />
+							<label for="star1" title="text">1 star</label>
+						</div>
+						</p>
 
-        	       </p>
-        	       <div class="clearfix"></div>
-        	        <p>Lorem Ipsum is simply dummy text of the pr make  but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
-        	        <p>
-        	            <a class="float-right btn btn-outline-primary ml-2"> <i class="fa fa-reply"></i> Reply</a>
-        	            <a class="float-right btn text-white btn-danger"> <i class="fa fa-heart"></i> Like</a>
-        	       </p>
-        	    </div>
-	        </div>
-	    </div>
+						<div class="clearfix"></div>
+						<p><input class="form-control my-2" name="Title" placeholder="Yorum başlığı"></p>
+						<p><textarea class="form-control my-2" name="Description" rows="4"> </textarea>
+						<p>
+							<button type="submit" class="btn btn-success ml-2"><a> <i class="fa fa-reply"></i> Yorumu
+									Gönder</a></button>
+						</p>
+					</form>
+				</div>
+			</div>
+		</div>
 	</div>

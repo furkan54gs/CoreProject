@@ -8,7 +8,7 @@
     <table class="table table-bordered table-sm mb-3">
         <thead class="bg-primary">
             <tr>
-                <td colspan="2">Satış Id: #@order.OrderNumber</td>
+                <td colspan="2"><strong>Satış Id: </strong> #@order.OrderNumber</td>
                 <th>Fiyat</th>
                 <th>Adet</th>
                 <th>İşlem</th>
@@ -27,11 +27,11 @@
                     <td>
                         @if (order.OrderState == EnumOrderState.delivered)
                         {
-                             <a class="btn btn-info" href="/orders/rate-it/@orderItem.OrderItemId" aria-label="Comment"><i class="fa fa-comment"
+                             <a class="btn btn-info" href="/orders/rate-it/@orderItem.ProductId" aria-label="Comment"><i class="fa fa-comment"
                         aria-hidden="true"></i>Yorum Yap</a>
                         }
 
-                        <a class="btn btn-danger" href="/orders/cancel-it/@orderItem.OrderItemId" aria-label="Cancel"><i class="fa fa-times"
+                        <a class="btn btn-danger" href="/orders/cancel-it/@orderItem.ProductId" aria-label="Cancel"><i class="fa fa-times"
                         aria-hidden="true"></i>İptal Et</a>
                     </td>
                 </tr>

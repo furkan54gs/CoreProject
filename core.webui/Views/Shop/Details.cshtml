@@ -6,9 +6,7 @@
     }
 </style>
 }
-@{
-    int rating = (int)Math.Round((double)Model.Product.Rate);
-}
+
 <div class="row">
     <div class="col-md-3">
         <img src="~/img/@Model.Product.ImageUrl" class="img-fluid">
@@ -29,7 +27,7 @@
                 </h4>
                 <div class="d-flex justify-content-start p-2">
 
-                    @for (var i = 0; i < rating; i++)
+                    @for (var i = 0; i < (int)Math.Round((double)Model.Product.Rate); i++)
                     {
                         <i class="text-warning fa fa-star py-1"></i>
                     }
@@ -87,23 +85,22 @@
                         <div class="card my-2">
                             <div class="card-body">
                                 <div class="row">
-                                    <div class="col-md-10">
+                                    <div class="col-md-11">
                                         <div>
-                                            <span class="d-flex justify-content-start"><strong>@item.Title</strong></span>
+                                            <div class="d-flex bd-highlight mb-3">
+                                                <div class="me-auto p-2 bd-highlight"><strong>@item.Title</strong></div>
+                                                <div class="p-2 bd-highlight"> <cite class="px-2">@item.DateAdded.ToString("dd.mm.yyyy")</cite>
+                                                </div>
+                                                <div class="p-2 bd-highlight">
+                                                    @for (int i = 0; i < ((int)Math.Round((double)item.Rate)); i++)
+                                                    {
+                                                        <i class="text-warning fa fa-star pt-1"></i>
+                                                    }
+                                                </div>
+                                            </div>
                                         </div>
                                         <div class="clearfix"></div>
                                         <p>@item.Description</p>
-                                    </div>
-                                    <div class="col-md-2">
-                                        <div class="d-flex justify-content-end">
-                                            <cite class="px-4">@item.DateAdded</cite>
-
-                                            @for (int i = 0; i < ((int)Math.Round((double)item.Rate)); i++)
-                                            {
-                                                <i class="text-warning fa fa-star pt-1"></i>
-                                            }
-
-                                        </div>
                                     </div>
                                 </div>
                             </div>

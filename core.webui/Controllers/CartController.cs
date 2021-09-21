@@ -22,13 +22,15 @@ namespace core.webui.Controllers
         private ICartService _cartService;
         private IOrderService _orderService;
         private IProductService _productservice;
+        private ICommentService _commentservice;
         private UserManager<User> _userManager;
-        public CartController(IOrderService orderService, ICartService cartService, IProductService productservice, UserManager<User> userManager)
+        public CartController(IOrderService orderService, ICartService cartService, IProductService productservice,ICommentService commentservice, UserManager<User> userManager)
         {
             _cartService = cartService;
             _orderService = orderService;
             _userManager = userManager;
             _productservice = productservice;
+            _commentservice = commentservice;
         }
         public IActionResult Index()
         {
@@ -169,10 +171,12 @@ namespace core.webui.Controllers
                 orderModel.OrderItems = order.OrderItems.Select(i => new OrderItemModel()
                 {
                     OrderItemId = i.Id,
+                    ProductId = i.ProductId,
                     Name = i.Product.Name,
                     Price = (double)i.Price,
                     Quantity = i.Quantity,
                     ImageUrl = i.Product.ImageUrl
+
                 }).ToList();
 
                 orderListModel.Add(orderModel);
@@ -217,7 +221,7 @@ namespace core.webui.Controllers
                     Quantity = item.Quantity,
                     ProductId = item.ProductId
                 };
-                _productservice.StockDecrease(item.ProductId,item.Quantity);
+                _productservice.StockUpdate(item.ProductId, item.Quantity);
                 order.OrderItems.Add(orderItem);
             }
             _orderService.Create(order);
@@ -238,7 +242,7 @@ namespace core.webui.Controllers
             ClearCart(cart.Id);
             var msg = new AlertMessage()
             {
-                Message = "Sipariş Tamamlandı",
+                Message = "Sipariş alındı :)",
                 AlertType = "success"
             };
 
@@ -252,103 +256,132 @@ namespace core.webui.Controllers
         }
 
 
-        public IActionResult Rate(int itemId)
+        public IActionResult Rate(int id)
         {
+
             //dönen itemi döndür. view de foto ve ad kısmında göster. form inputları ekle ve post işlemini gerçekleştir.
-            return View();
+            entity.Product product = _productservice.GetById(id);
+            ProductModel productview = new ProductModel()
+            {
+                ProductId = product.ProductId,
+                Name = product.Name,
+                ImageUrl = product.ImageUrl
+            };
+            return View(productview);
         }
 
         [HttpPost]
-        public IActionResult Rate()
+        public IActionResult Rate(CommentModel commentFromView)
         {
-            return View();
+            //if you want more secure; get all orderitems bought by user and check productId
+            Comment comment = new Comment()
+            {
+                UserId = _userManager.GetUserId(User),
+                ProductId = commentFromView.ProductId,
+                Title = commentFromView.Title,
+                Description = commentFromView.Description,
+                Rate = commentFromView.Rate,
+                DateAdded = DateTime.Now,
+                IsApproved = false
+            };
+            _commentservice.Create(comment);
+            _productservice.CommentUpdate(commentFromView.ProductId,(double)commentFromView.Rate);
+
+            var msg = new AlertMessage()
+            {
+                Message = "Yorumunuz onaylanmak üzere gönderildi :) ",
+                AlertType = "success"
+            };
+            TempData["message"] = JsonConvert.SerializeObject(msg);
+
+            return RedirectToAction("Success");
         }
 
 
 
-  /*
-                private Payment PaymentProcess(OrderModel model)
-                {
-                    Options options = new Options();
-                    options.ApiKey = "sandbox-RStpAR6sBz86RpFTuWPyF7hjh8c8g9E4";
-                    options.SecretKey = "sandbox-0zu0oxpXipwFsSGu1FrSofDVhTrWig2p";
-                    options.BaseUrl = "https://sandbox-api.iyzipay.com";
+        /*
+                      private Payment PaymentProcess(OrderModel model)
+                      {
+                          Options options = new Options();
+                          options.ApiKey = "sandbox-RStpAR6sBz86RpFTuWPyF7hjh8c8g9E4";
+                          options.SecretKey = "sandbox-0zu0oxpXipwFsSGu1FrSofDVhTrWig2p";
+                          options.BaseUrl = "https://sandbox-api.iyzipay.com";
 
-                    CreatePaymentRequest request = new CreatePaymentRequest();
-                    request.Locale = Locale.TR.ToString();
-                    request.ConversationId = new Random().Next(111111111,999999999).ToString();
-                    request.Price = model.CartModel.TotalPrice().ToString();
-                    request.PaidPrice = model.CartModel.TotalPrice().ToString();
-                    request.Currency = Currency.TRY.ToString();
-                    request.Installment = 1;
-                    request.BasketId = "B67832";
-                    request.PaymentChannel = PaymentChannel.WEB.ToString();
-                    request.PaymentGroup = PaymentGroup.PRODUCT.ToString();
+                          CreatePaymentRequest request = new CreatePaymentRequest();
+                          request.Locale = Locale.TR.ToString();
+                          request.ConversationId = new Random().Next(111111111,999999999).ToString();
+                          request.Price = model.CartModel.TotalPrice().ToString();
+                          request.PaidPrice = model.CartModel.TotalPrice().ToString();
+                          request.Currency = Currency.TRY.ToString();
+                          request.Installment = 1;
+                          request.BasketId = "B67832";
+                          request.PaymentChannel = PaymentChannel.WEB.ToString();
+                          request.PaymentGroup = PaymentGroup.PRODUCT.ToString();
 
-                    PaymentCard paymentCard = new PaymentCard();
-                    paymentCard.CardHolderName = model.CardName;
-                    paymentCard.CardNumber = model.CardNumber;
-                    paymentCard.ExpireMonth = model.ExpirationMonth;
-                    paymentCard.ExpireYear = model.ExpirationYear;
-                    paymentCard.Cvc = model.Cvc;
-                    paymentCard.RegisterCard = 0;
-                    request.PaymentCard = paymentCard;
+                          PaymentCard paymentCard = new PaymentCard();
+                          paymentCard.CardHolderName = model.CardName;
+                          paymentCard.CardNumber = model.CardNumber;
+                          paymentCard.ExpireMonth = model.ExpirationMonth;
+                          paymentCard.ExpireYear = model.ExpirationYear;
+                          paymentCard.Cvc = model.Cvc;
+                          paymentCard.RegisterCard = 0;
+                          request.PaymentCard = paymentCard;
 
-                    //  paymentCard.CardNumber = "5528790000000008";
-                    // paymentCard.ExpireMonth = "12";
-                    // paymentCard.ExpireYear = "2030";
-                    // paymentCard.Cvc = "123";
+                          //  paymentCard.CardNumber = "5528790000000008";
+                          // paymentCard.ExpireMonth = "12";
+                          // paymentCard.ExpireYear = "2030";
+                          // paymentCard.Cvc = "123";
 
-                    Buyer buyer = new Buyer();
-                    buyer.Id = "BY789";
-                    buyer.Name = model.FirstName;
-                    buyer.Surname = model.LastName;
-                    buyer.GsmNumber = "+905350000000";
-                    buyer.Email = "email@email.com";
-                    buyer.IdentityNumber = "74300864791";
-                    buyer.LastLoginDate = "2015-10-05 12:43:35";
-                    buyer.RegistrationDate = "2013-04-21 15:12:09";
-                    buyer.RegistrationAddress = "Nidakule Göztepe, Merdivenköy Mah. Bora Sok. No:1";
-                    buyer.Ip = "85.34.78.112";
-                    buyer.City = "Istanbul";
-                    buyer.Country = "Turkey";
-                    buyer.ZipCode = "34732";
-                    request.Buyer = buyer;
+                          Buyer buyer = new Buyer();
+                          buyer.Id = "BY789";
+                          buyer.Name = model.FirstName;
+                          buyer.Surname = model.LastName;
+                          buyer.GsmNumber = "+905350000000";
+                          buyer.Email = "email@email.com";
+                          buyer.IdentityNumber = "74300864791";
+                          buyer.LastLoginDate = "2015-10-05 12:43:35";
+                          buyer.RegistrationDate = "2013-04-21 15:12:09";
+                          buyer.RegistrationAddress = "Nidakule Göztepe, Merdivenköy Mah. Bora Sok. No:1";
+                          buyer.Ip = "85.34.78.112";
+                          buyer.City = "Istanbul";
+                          buyer.Country = "Turkey";
+                          buyer.ZipCode = "34732";
+                          request.Buyer = buyer;
 
-                    Address shippingAddress = new Address();
-                    shippingAddress.ContactName = "Jane Doe";
-                    shippingAddress.City = "Istanbul";
-                    shippingAddress.Country = "Turkey";
-                    shippingAddress.Description = "Nidakule Göztepe, Merdivenköy Mah. Bora Sok. No:1";
-                    shippingAddress.ZipCode = "34742";
-                    request.ShippingAddress = shippingAddress;
+                          Address shippingAddress = new Address();
+                          shippingAddress.ContactName = "Jane Doe";
+                          shippingAddress.City = "Istanbul";
+                          shippingAddress.Country = "Turkey";
+                          shippingAddress.Description = "Nidakule Göztepe, Merdivenköy Mah. Bora Sok. No:1";
+                          shippingAddress.ZipCode = "34742";
+                          request.ShippingAddress = shippingAddress;
 
-                    Address billingAddress = new Address();
-                    billingAddress.ContactName = "Jane Doe";
-                    billingAddress.City = "Istanbul";
-                    billingAddress.Country = "Turkey";
-                    billingAddress.Description = "Nidakule Göztepe, Merdivenköy Mah. Bora Sok. No:1";
-                    billingAddress.ZipCode = "34742";
-                    request.BillingAddress = billingAddress;
+                          Address billingAddress = new Address();
+                          billingAddress.ContactName = "Jane Doe";
+                          billingAddress.City = "Istanbul";
+                          billingAddress.Country = "Turkey";
+                          billingAddress.Description = "Nidakule Göztepe, Merdivenköy Mah. Bora Sok. No:1";
+                          billingAddress.ZipCode = "34742";
+                          request.BillingAddress = billingAddress;
 
-                    List<BasketItem> basketItems = new List<BasketItem>();
-                    BasketItem basketItem;
+                          List<BasketItem> basketItems = new List<BasketItem>();
+                          BasketItem basketItem;
 
-                    foreach (var item in model.CartModel.CartItems)
-                    {
-                        basketItem = new BasketItem();
-                        basketItem.Id = item.ProductId.ToString();
-                        basketItem.Name = item.Name;
-                        basketItem.Category1 = "Telefon";
-                        basketItem.Price = item.Price.ToString();
-                        basketItem.ItemType = BasketItemType.PHYSICAL.ToString();
-                        basketItems.Add(basketItem);
-                    }
-                    request.BasketItems = basketItems;
-                    return Payment.Create(request, options);
-                }
+                          foreach (var item in model.CartModel.CartItems)
+                          {
+                              basketItem = new BasketItem();
+                              basketItem.Id = item.ProductId.ToString();
+                              basketItem.Name = item.Name;
+                              basketItem.Category1 = "Telefon";
+                              basketItem.Price = item.Price.ToString();
+                              basketItem.ItemType = BasketItemType.PHYSICAL.ToString();
+                              basketItems.Add(basketItem);
+                          }
+                          request.BasketItems = basketItems;
+                          return Payment.Create(request, options);
+                      }
 
-        */
+              */
 
     }
 }
