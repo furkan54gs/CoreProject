@@ -1,43 +1,39 @@
 
--------------------------BACKEND----------------------
--fluent apilerin düzenlenmesi ve türkçeleştirilmesi (comment modeli ekle) ^^
--ürünler için yorum bölümü ^^
--ürün eklendiğinde rate 0 eklensin, orderda rate güncellensin ^^
--ürünlerin özelliğine göre artan veya azalan sıralama ekle ^^
--category url oto oluşsun   ^^
--product url oto oluşsun    ^^
--ürün sayfasında stocktan fazla sipariş verilmesin  ^^
--ödeme yöntemi aktifleştir ^^
+--------------------------done-----------------------
+
+-tüm proje packagelarının güncelenmesi ve net 5'e geçiş
+-git çalışma ortamı entegresi
+-fluent apilerin düzenlenmesi ve türkçeleştirilmesi
+-gerekli model eklemeleri ve güncelleştirmeleri
+-ürünler için yorum ve admin için yorum  onay bölümü
+-ürün eklendiğinde stock güncellemesi ve siparişte rate güncellemesi
+-ürünlerin özelliğine göre artan veya azalan sıralama eklenmesi
+-category url ve product url otomatik oluşturma
+-ürün stock ve adet bağlantısı (stocktan fazla sipariş verilmesin)
+-ödeme yöntemi değiştir (iyzico to stripe)
+
+-------------------------undone----------------------
 
 -navbar linkleri ekle ve düzenle
--bread crump
--harita ekle ve yerini göster
+-harita ekle ve yer bilgisi göster, iletişim böülümü ekle
 -ürünler için slider ve çoklu foto
 -profil sayfası oluştur ^^  ve adres kısmını tümü için ekle  (edit ekle)
 -ürün filtresi ekle
 -anasayfa carousel
-
----admine özel sayfa---
+-order controller oluştur, tüm view'leri elden geçir
 -sipariş kontrolü ve orderstate hızlı değişim için admine özel sayfa ekle
--yorum kontrolü
 
 
 
---------------------------FRONTEND--------------------
--profil sayfası
--navbar linkleri ekle ve düzenle
--footer'ı belli bir yükseklikte tut
 
-
-
--------------------------SONRASI İÇİN-----------------
+-------------------------after essentials-----------------
 *category amazon arayüzüne benzer yapı
 *category subtree
 *seo uyunmluluğu
 *discount sistemi
 
 
--------------------------HATIRLATMALAR----------------
+-------------------------reminders----------------
 !program içindeki detaylı hata gösterimi açık
 !eposta ayarları yapılı değil
 !vscode debug build işlemi devre dışı bırakıldı

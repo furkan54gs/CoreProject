@@ -165,6 +165,12 @@ namespace core.webui
                 );
 
                 endpoints.MapControllerRoute(
+                    name: "admincomments",
+                    pattern: "admin/comment/list/{isApproved?}",
+                    defaults: new { controller = "Admin", action = "CommentList" }
+               );
+
+                endpoints.MapControllerRoute(
                    name: "adminusers",
                    pattern: "admin/user/list",
                    defaults: new { controller = "Admin", action = "UserList" }
@@ -250,11 +256,14 @@ namespace core.webui
                     pattern: "products/{category?}/{orderby?}",
                     defaults: new { controller = "Shop", action = "List" }
                 );
-
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
             });
+
+
+
+
             SeedIdentity.Seed(userManager, roleManager, cartService, configuration).Wait();
 
         }

@@ -12,10 +12,10 @@
             @if (User.Identity.IsAuthenticated)
             {
                 <li class="nav-item">
-                    <a href="/cart" class="nav-link">Cart</a>
+                    <a href="/cart" class="nav-link">Sepet</a>
                 </li>
                 <li class="nav-item">
-                    <a href="/orders" class="nav-link">Orders</a>
+                    <a href="/orders" class="nav-link">Siparişler</a>
                 </li>
 
                 if (User.IsInRole("admin"))
@@ -31,6 +31,9 @@
                     </li>
                     <li class="nav-item">
                         <a href="/admin/user/list" class="nav-link">Kullanıcılar</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/admin/comment/list" class="nav-link">Yorumlar</a>
                     </li>
                 }
             }

@@ -23,15 +23,18 @@ namespace core.webui.Controllers
     {
         private IProductService _productService;
         private ICategoryService _categoryService;
+        private ICommentService _commentService;
         private RoleManager<IdentityRole> _roleManager;
         private UserManager<User> _userManager;
         public AdminController(IProductService productService,
                                ICategoryService categoryService,
+                               ICommentService commentService,
                                RoleManager<IdentityRole> roleManager,
                                UserManager<User> userManager)
         {
             _productService = productService;
             _categoryService = categoryService;
+            _commentService = commentService;
             _roleManager = roleManager;
             _userManager = userManager;
         }
@@ -460,5 +463,42 @@ namespace core.webui.Controllers
             _categoryService.DeleteFromCategory(productId, categoryId);
             return Redirect("/admin/categories/" + categoryId);
         }
+
+        public IActionResult CommentList(string isApproved)
+        {
+            List<Comment> comment= _commentService.GetAll();
+
+            if(isApproved=="approved")
+                return View(comment.Where(p => p.IsApproved==true));
+            else if(isApproved=="notapproved")
+                return View(comment.Where(p => p.IsApproved==false));
+            else
+                return View(comment);
+        }
+
+        [HttpPost]
+        public JsonResult CommentApproved(int commentId)
+        {
+
+            Comment comment = _commentService.GetById(commentId);
+            var data = "";
+
+            if (comment != null)
+            {
+                if (comment.IsApproved == true)
+                    comment.IsApproved = false;
+                else
+                    comment.IsApproved = true;
+                _commentService.Update(comment);
+                data = "işlem başarılı " + "id= " + commentId;
+                return Json(data);
+            }
+            else
+            {
+                data = "yorum bulunamadı " + "id= "+ commentId;
+                return Json(data);
+            }
+        }
+
     }
 }
