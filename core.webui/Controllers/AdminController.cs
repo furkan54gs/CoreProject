@@ -58,6 +58,7 @@ namespace core.webui.Controllers
                     Address = user.Address,
                     City = user.City,
                     Email = user.Email,
+                    Phone = user.PhoneNumber,
                     EmailConfirmed = user.EmailConfirmed,
                     SelectedRoles = selectedRoles
                 });
@@ -80,6 +81,7 @@ namespace core.webui.Controllers
                     user.Address = model.Address;
                     user.City = model.City;
                     user.Email = model.Email;
+                    user.PhoneNumber = model.Phone;
                     user.EmailConfirmed = model.EmailConfirmed;
 
                     var result = await _userManager.UpdateAsync(user);
@@ -96,9 +98,25 @@ namespace core.webui.Controllers
                 }
                 return Redirect("/admin/user/list");
             }
-
             return View(model);
+        }
 
+        [HttpPost]
+        public async Task<IActionResult> UserDelete(string userId)
+        {
+            var user = await _userManager.FindByIdAsync(userId);
+            if (user != null)
+            {
+                await _userManager.DeleteAsync(user);
+
+                TempData.Put("message", new AlertMessage()
+                {
+                    Title = "Başarılı",
+                    Message = "Kullanıcı silindi",
+                    AlertType = "success"
+                });
+            }
+            return RedirectToAction("UserList");
         }
 
         public IActionResult UserList()
@@ -466,12 +484,12 @@ namespace core.webui.Controllers
 
         public IActionResult CommentList(string isApproved)
         {
-            List<Comment> comment= _commentService.GetAll();
+            List<Comment> comment = _commentService.GetAll();
 
-            if(isApproved=="approved")
-                return View(comment.Where(p => p.IsApproved==true));
-            else if(isApproved=="notapproved")
-                return View(comment.Where(p => p.IsApproved==false));
+            if (isApproved == "approved")
+                return View(comment.Where(p => p.IsApproved == true));
+            else if (isApproved == "notapproved")
+                return View(comment.Where(p => p.IsApproved == false));
             else
                 return View(comment);
         }
@@ -495,10 +513,13 @@ namespace core.webui.Controllers
             }
             else
             {
-                data = "yorum bulunamadı " + "id= "+ commentId;
+                data = "yorum bulunamadı " + "id= " + commentId;
                 return Json(data);
             }
         }
+
+
+
 
     }
 }

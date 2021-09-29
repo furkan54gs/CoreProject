@@ -15,6 +15,15 @@
         $('#myTable').DataTable();
     });
 </script>
+<script>
+    function checkDelete(fName,id) {
+        event.preventDefault();
+        var r = confirm(fName + " " + "adlı kullanıcıyı silmek istediğinizden emin misiniz ?");
+        if (r == true) {
+            document.getElementById(`userDelete ${id}`).submit();
+        }
+    }
+</script>
 
 }
 
@@ -24,8 +33,8 @@
         <h1 class="h3">User List</h1>
         <hr>
         @* <hr>
-        <a class="btn btn-primary btn-sm" href="/admin/user/create">Create User</a>
-        <hr> *@
+            <a class="btn btn-primary btn-sm" href="/admin/user/create">Create User</a>
+            <hr> *@
         <table data-page-length='3' id="myTable" class="table table-bordered mt-3">
             <thead>
                 <tr>
@@ -49,11 +58,11 @@
                             <td>@item.Email</td>
                             <td>@item.EmailConfirmed</td>
                             <td>
-                                <a href="/admin/user/@item.Id" class="btn btn-primary btn-sm mr-2">Edit</a>
+                                <a href="/admin/user/@item.Id" class="btn btn-primary btn-sm mr-2">Düzenle</a>
 
-                                <form action="/admin/user/delete" method="POST" style="display: inline;">
-                                    <input type="hidden" name="UserId" value="@item.Id">
-                                    <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                                <form id="userDelete @item.Id" action="/admin/user/delete" method="POST" style="display: inline;">
+                                    <input type="hidden" name="userId" value="@item.Id">
+                                    <button onclick="checkDelete('@item.FirstName','@item.Id')" class="btn btn-danger btn-sm">Sil</button>
                                 </form>
                             </td>
                         </tr>

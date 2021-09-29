@@ -1,23 +1,24 @@
 
 --------------------------done-----------------------
-
--tüm proje packagelarının güncelenmesi ve net 5'e geçiş
+-katmanlı mimari, generic sınıflar
 -git çalışma ortamı entegresi
 -fluent apilerin düzenlenmesi ve türkçeleştirilmesi
 -gerekli model eklemeleri ve güncelleştirmeleri
+-profil sayfası oluşturulması
 -ürünler için yorum ve admin için yorum  onay bölümü
 -ürün eklendiğinde stock güncellemesi ve siparişte rate güncellemesi
 -ürünlerin özelliğine göre artan veya azalan sıralama eklenmesi
 -category url ve product url otomatik oluşturma
 -ürün stock ve adet bağlantısı (stocktan fazla sipariş verilmesin)
--ödeme yöntemi değiştir (iyzico to stripe)
+-ödeme yöntemi (iyzico to stripe)
 
 -------------------------undone----------------------
+
 
 -navbar linkleri ekle ve düzenle
 -harita ekle ve yer bilgisi göster, iletişim böülümü ekle
 -ürünler için slider ve çoklu foto
--profil sayfası oluştur ^^  ve adres kısmını tümü için ekle  (edit ekle)
+-profilden şifre ve e-posta değişikliği
 -ürün filtresi ekle
 -anasayfa carousel
 -order controller oluştur, tüm view'leri elden geçir
@@ -31,10 +32,11 @@
 *category subtree
 *seo uyunmluluğu
 *discount sistemi
+*web api ve mobil uygulama
 
 
 -------------------------reminders----------------
-!program içindeki detaylı hata gösterimi açık
+!Program.cs detaylı hata gösterimi açık
 !eposta ayarları yapılı değil
 !vscode debug build işlemi devre dışı bırakıldı
 !order-> conversation id db'den kaldırıldı. iyzicoda eksiklik olur

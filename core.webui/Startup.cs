@@ -176,6 +176,12 @@ namespace core.webui
                    defaults: new { controller = "Admin", action = "UserList" }
                 );
 
+                  endpoints.MapControllerRoute(
+                    name: "adminroles",
+                    pattern: "admin/user/delete",
+                    defaults: new { controller = "Admin", action = "UserDelete" }
+                );
+
                 endpoints.MapControllerRoute(
                    name: "adminuseredit",
                    pattern: "admin/user/{id?}",

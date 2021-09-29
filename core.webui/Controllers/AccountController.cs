@@ -240,12 +240,36 @@ namespace core.webui.Controllers
                 FirstName = user.FirstName,
                 LastName = user.LastName,
                 Email = user.Email,
+                Phone = user.PhoneNumber,
                 Address = user.Address,
                 City = user.City,
                 EmailConfirmed = user.EmailConfirmed
             };
 
             return View(userDetails);
+        }
+
+        [Authorize]
+        [HttpPost]
+        public async Task<IActionResult> Manage(UserDetailsModel userDetailsModel)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(userDetailsModel);
+            }
+
+            var user = await _userManager.GetUserAsync(User);
+
+            user.FirstName = userDetailsModel.FirstName;
+            user.LastName = userDetailsModel.LastName;
+            user.Address = userDetailsModel.Address;
+            user.City = userDetailsModel.City;
+            user.PhoneNumber = userDetailsModel.Phone;
+
+            await _userManager.UpdateAsync(user);
+
+
+            return View(userDetailsModel);
         }
 
 
