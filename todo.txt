@@ -14,9 +14,9 @@
 
 -------------------------undone----------------------
 
-
+-product create, edit sayfasıyla aynı
 -navbar linkleri ekle ve düzenle
--harita ekle ve yer bilgisi göster, iletişim böülümü ekle
+-harita ekle ve yer bilgisi göster, iletişim bölümü ekle
 -ürünler için slider ve çoklu foto
 -profilden şifre ve e-posta değişikliği
 -ürün filtresi ekle

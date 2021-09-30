@@ -143,15 +143,15 @@ namespace core.data.Concrete.EfCore
 
             if (product != null)
             {
-                if (rate>5)
+                if (rate > 5)
                 {
-                    rate=5;
+                    rate = 5;
                 }
                 product.TotalComment += 1;
                 product.Rate = (((product.TotalComment - 1) * product.Rate) + rate) / product.TotalComment;
-                if(product.Rate>5)
+                if (product.Rate > 5)
                 {
-                    product.Rate=5;
+                    product.Rate = 5;
                 }
             }
         }
@@ -175,12 +175,14 @@ namespace core.data.Concrete.EfCore
                 product.IsApproved = entity.IsApproved;
                 product.IsHome = entity.IsHome;
 
-                product.ProductCategories = categoryIds.Select(catid => new ProductCategory()
+                if (categoryIds != null)
                 {
-                    ProductId = entity.ProductId,
-                    CategoryId = catid
-                }).ToList();
-
+                    product.ProductCategories = categoryIds.Select(catid => new ProductCategory()
+                    {
+                        ProductId = entity.ProductId,
+                        CategoryId = catid
+                    }).ToList();
+                }
             }
         }
 
