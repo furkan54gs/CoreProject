@@ -7,6 +7,6 @@ namespace core.data.Abstract
         Cart GetByUserId(string userId);
         void DeleteFromCart(int cartId, int productId);
         void ClearCart(int cartId);
-        double CalculateTotal(string userId);
+        decimal CalculateTotal(string userId);
     }
 }

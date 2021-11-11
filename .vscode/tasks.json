@@ -37,9 +37,6 @@
                 "/consoleloggerparameters:NoSummary"
             ],
             "problemMatcher": "$msCompile"
-            // "options": {
-            //     "cwd": "${workspaceFolder}/core.webui/"
-            // }
-        }
+        },
     ]
 }

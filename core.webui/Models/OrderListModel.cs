@@ -23,7 +23,7 @@ namespace core.webui.Models
         public EnumOrderState OrderState { get; set; }
         public List<OrderItemModel> OrderItems { get; set; }
 
-        public double TotalPrice()
+        public decimal TotalPrice()
         {
             return OrderItems.Sum(i=>i.Price * i.Quantity);
         }
@@ -33,7 +33,7 @@ namespace core.webui.Models
     {
         public int OrderItemId { get; set; }
         public int ProductId { get; set; }
-        public double Price { get; set; }
+        public decimal Price { get; set; }
         public string Name { get; set; }
         public string ImageUrl { get; set; }
         public int Quantity { get; set; }

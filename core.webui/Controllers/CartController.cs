@@ -43,7 +43,7 @@ namespace core.webui.Controllers
                     CartItemId = i.Id,
                     ProductId = i.ProductId,
                     Name = i.Product.Name,
-                    Price = (double)i.Product.Price,
+                    Price = (decimal)i.Product.Price,
                     ImageUrl = i.Product.ImageUrl,
                     Quantity = i.Quantity
 
@@ -106,7 +106,7 @@ namespace core.webui.Controllers
                         CartItemId = i.Id,
                         ProductId = i.ProductId,
                         Name = i.Product.Name,
-                        Price = (double)i.Product.Price,
+                        Price = (decimal)i.Product.Price,
                         ImageUrl = i.Product.ImageUrl,
                         Quantity = i.Quantity
 
@@ -132,7 +132,7 @@ namespace core.webui.Controllers
                         CartItemId = i.Id,
                         ProductId = i.ProductId,
                         Name = i.Product.Name,
-                        Price = (double)i.Product.Price,
+                        Price = (decimal)i.Product.Price,
                         ImageUrl = i.Product.ImageUrl,
                         Quantity = i.Quantity
                     }).ToList()
@@ -173,7 +173,7 @@ namespace core.webui.Controllers
                     OrderItemId = i.Id,
                     ProductId = i.ProductId,
                     Name = i.Product.Name,
-                    Price = (double)i.Price,
+                    Price = (decimal)i.Price,
                     Quantity = i.Quantity,
                     ImageUrl = i.Product.ImageUrl
 
@@ -217,7 +217,7 @@ namespace core.webui.Controllers
             {
                 var orderItem = new core.entity.OrderItem()
                 {
-                    Price = (double)item.Product.Price,
+                    Price = (decimal)item.Product.Price,
                     Quantity = item.Quantity,
                     ProductId = item.ProductId
                 };

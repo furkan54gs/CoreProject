@@ -17,10 +17,10 @@ namespace core.data.Concrete.EfCore
             get {return context as CoreContext; }
         }
 
-        public double CalculateTotal(string userId)
+        public decimal CalculateTotal(string userId)
         {
             Cart cart= GetByUserId(userId);
-            return((double)cart.CartItems.Select(i => (i.Product.Price) * i.Quantity).Sum());
+            return((decimal)cart.CartItems.Select(i => (i.Product.Price) * i.Quantity).Sum());
         }
 
         public void ClearCart(int cartId)

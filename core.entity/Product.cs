@@ -8,7 +8,7 @@ namespace core.entity
         public int ProductId { get; set; }
         public string Name { get; set; }
         public string Url { get; set; }
-        public double? Price { get; set; }
+        public decimal? Price { get; set; }
         public double? Rate { get; set; }
         public int TotalComment { get; set; }
         public int TotalSale { get; set; }

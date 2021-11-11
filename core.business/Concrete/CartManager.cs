@@ -48,7 +48,7 @@ namespace core.business.Concrete
             return false;
         }
 
-        public double CalculateTotal(string userId)
+        public decimal CalculateTotal(string userId)
         {
             return _unitofwork.Carts.CalculateTotal(userId);
         }

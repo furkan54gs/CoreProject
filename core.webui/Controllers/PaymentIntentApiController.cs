@@ -44,7 +44,7 @@ namespace core.webui.Controllers
             {
                 Customer = customer.Id,
                 SetupFutureUsage = "off_session",
-                Amount = CalculateOrderAmount(_userManager.GetUserId(User)),
+                Amount = (long)CalculateOrderAmount(_userManager.GetUserId(User)),
                 Currency = "try",
                 Shipping = new ChargeShippingOptions
                 {
@@ -64,13 +64,13 @@ namespace core.webui.Controllers
             });
         }
 
-        private long CalculateOrderAmount(string userId)
+        private decimal CalculateOrderAmount(string userId)
         {
             // Replace this constant with a calculation of the order's amount
             // Calculate the order total on the server to prevent
             // people from directly manipulating the amount on the client
 
-            return (long)(_cartService.CalculateTotal(userId) * 100);
+            return (_cartService.CalculateTotal(userId)*100);
         }
 
         public void ChargeCustomer(string customerId)

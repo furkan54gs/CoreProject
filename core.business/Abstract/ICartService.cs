@@ -9,6 +9,6 @@ namespace core.business.Abstract
         bool AddToCart(string userId, int productId, int quantity);
         void DeleteFromCart(string userId, int productId);
         void ClearCart(int cartId);
-        double CalculateTotal(string userId);
+        decimal CalculateTotal(string userId);
     }
 }

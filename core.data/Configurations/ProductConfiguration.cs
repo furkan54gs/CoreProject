@@ -8,14 +8,15 @@ namespace core.data.Configurations
     {
         public void Configure(EntityTypeBuilder<Product> builder)
         {
-            builder.HasKey(m=>m.ProductId);
+            builder.HasKey(m => m.ProductId);
 
-            builder.Property(m=>m.Name).IsRequired().HasMaxLength(100);
+            builder.Property(m => m.Name).IsRequired().HasMaxLength(100);
 
-            builder.Property(m=>m.Rate).HasMaxLength(5);
+            builder.Property(m => m.Rate).HasMaxLength(5);
 
-            builder.Property(m=>m.DateAdded).HasDefaultValueSql("CURRENT_TIMESTAMP(6)");    // mssql getdate()
-                                                                                            // sqlite date('now')
+            builder.Property(m => m.DateAdded).HasDefaultValueSql("CURRENT_TIMESTAMP(6)");    // mssql getdate()
+                                                                                              // sqlite date('now')
+            builder.Property(m => m.Price).HasPrecision(10, 2);
         }
     }
 }

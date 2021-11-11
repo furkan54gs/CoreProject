@@ -11,19 +11,20 @@
 -category url ve product url otomatik oluşturma
 -ürün stock ve adet bağlantısı (stocktan fazla sipariş verilmesin)
 -ödeme yöntemi (iyzico to stripe)
+-price double to decimal
 
 -------------------------undone----------------------
 
+-ürünler için slider ve çoklu foto
+-admin list of all orders
 -product create, edit sayfasıyla aynı
 -navbar linkleri ekle ve düzenle
 -harita ekle ve yer bilgisi göster, iletişim bölümü ekle
--ürünler için slider ve çoklu foto
 -profilden şifre ve e-posta değişikliği
 -ürün filtresi ekle
 -anasayfa carousel
 -order controller oluştur, tüm view'leri elden geçir
 -sipariş kontrolü ve orderstate hızlı değişim için admine özel sayfa ekle
-
 
 
 
