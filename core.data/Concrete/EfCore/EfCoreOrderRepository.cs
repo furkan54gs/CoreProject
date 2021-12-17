@@ -24,6 +24,8 @@ namespace core.data.Concrete.EfCore
             var orders = CoreContext.Orders
                                 .Include(i => i.OrderItems)
                                 .ThenInclude(i => i.Product)
+                                .ThenInclude(i => i.Images.Take(1))
+                                .AsSplitQuery()
                                 .AsQueryable();
 
             if (!string.IsNullOrEmpty(userId))

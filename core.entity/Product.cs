@@ -20,5 +20,6 @@ namespace core.entity
         public DateTime DateAdded { get; set; }
 
         public List<ProductCategory> ProductCategories { get; set; }
+        public List<Image> Images { get; set; }
     }
 }

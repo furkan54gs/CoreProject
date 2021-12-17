@@ -25,7 +25,7 @@ namespace core.webui.Models
 
         public decimal TotalPrice()
         {
-            return OrderItems.Sum(i=>i.Price * i.Quantity);
+            return OrderItems.Sum(i => i.Price * i.Quantity);
         }
     }
 
@@ -35,6 +35,7 @@ namespace core.webui.Models
         public int ProductId { get; set; }
         public decimal Price { get; set; }
         public string Name { get; set; }
+        public string ProductUrl { get; set; }
         public string ImageUrl { get; set; }
         public int Quantity { get; set; }
     }

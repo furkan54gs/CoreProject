@@ -24,7 +24,14 @@
                     {
                         <tr>
                             <td>@item.ProductId</td>
-                            <td><img src="~/img/@item.ImageUrl" width="80"></td>
+                            @if ((item.Images != null) && (item.Images.Any()))
+                            {
+                                <td><img src="~/img/@item.Images.FirstOrDefault().Name" width="80" alt=""></td>
+                            }
+                            else
+                            {
+                                <td><img src="~/img/default.jpg" width="80" alt=""></td>
+                            }
                             <td>@item.Name</td>
                             <td>@item.Price</td>
                             <td>

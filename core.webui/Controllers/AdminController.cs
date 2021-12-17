@@ -16,8 +16,7 @@ using core.webui.Models;
 
 namespace core.webui.Controllers
 {
-    // sadikturan, efeturan, yigitbilgi => admin
-    // adabilgi => customer
+
     [Authorize(Roles = "admin")]
     public class AdminController : Controller
     {
@@ -26,17 +25,20 @@ namespace core.webui.Controllers
         private ICommentService _commentService;
         private RoleManager<IdentityRole> _roleManager;
         private UserManager<User> _userManager;
+        private IImageService _imageService;
         public AdminController(IProductService productService,
                                ICategoryService categoryService,
                                ICommentService commentService,
                                RoleManager<IdentityRole> roleManager,
-                               UserManager<User> userManager)
+                               UserManager<User> userManager,
+                               IImageService imageService)
         {
             _productService = productService;
             _categoryService = categoryService;
             _commentService = commentService;
             _roleManager = roleManager;
             _userManager = userManager;
+            _imageService = imageService;
         }
 
 
@@ -307,7 +309,7 @@ namespace core.webui.Controllers
                 return NotFound();
             }
 
-            var entity = _productService.GetByIdWithCategories((int)id);
+            var entity = _productService.GetByIdWithAll((int)id);
 
             if (entity == null)
             {
@@ -326,7 +328,9 @@ namespace core.webui.Controllers
                 Description = entity.Description,
                 IsApproved = entity.IsApproved,
                 IsHome = entity.IsHome,
-                SelectedCategories = entity.ProductCategories.Select(i => i.Category).ToList()
+                SelectedCategories = entity.ProductCategories.Select(i => i.Category).ToList(),
+                Images = entity.Images
+
             };
 
             ViewBag.Categories = _categoryService.GetAll();
@@ -335,11 +339,11 @@ namespace core.webui.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> ProductEdit(ProductModel model, int[] categoryIds, IFormFile file)
+        public async Task<IActionResult> ProductEdit(ProductModel model, int[] categoryIds, IFormFile[] files)
         {
             if (ModelState.IsValid)
             {
-                var entity = _productService.GetById(model.ProductId);
+                var entity = _productService.GetById(model.ProductId); //override edip image ile gelcek
                 if (entity == null)
                 {
                     return NotFound();
@@ -352,17 +356,46 @@ namespace core.webui.Controllers
                 entity.IsHome = model.IsHome;
                 entity.IsApproved = model.IsApproved;
 
-                if (file != null)
+                if (files != null && files.Any())
                 {
-                    var extention = Path.GetExtension(file.FileName);
-                    var randomName = string.Format($"{Guid.NewGuid()}{extention}");
-                    entity.ImageUrl = randomName;
-                    var path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot\\img", randomName);
 
-                    using (var stream = new FileStream(path, FileMode.Create))
+                    foreach (var item in files)
                     {
-                        await file.CopyToAsync(stream);
+                        var extention = Path.GetExtension(item.FileName);
+                        var randomName = string.Format($"{Guid.NewGuid()}{extention}");
+                        // entity.ImageUrl = randomName;
+                        _imageService.Create(new Image
+                        {
+                            ProductId = model.ProductId,
+                            Name = randomName,
+                        });
+
+
+                        // if (entity.Images != null && entity.Images.Any())  // Eğer image için boş kontolü yaparsak
+                        // {
+
+                        //     entity.Images.Add(new Image
+                        //     {
+                        //         ProductId = model.ProductId,
+                        //         Name = randomName,
+                        //     });
+                        // }
+                        // else
+                        // {
+                        //     entity.Images = new List<Image>{new Image(){
+                        //     ProductId = model.ProductId,
+                        //     Name = randomName,
+                        // }};
+                        // }
+
+                        var path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot\\img", randomName);
+
+                        using (var stream = new FileStream(path, FileMode.Create))
+                        {
+                            await item.CopyToAsync(stream);
+                        }
                     }
+
                 }
 
                 if (_productService.Update(entity, categoryIds))

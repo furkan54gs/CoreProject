@@ -7,7 +7,7 @@ namespace core.business.Abstract
     {
         List<Comment> GetComments(int productId);
         Comment GetById(int id);
-
+        Comment GetByUserProdId(string userId, int productId);
         List<Comment> GetAll();
 
         void Create(Comment entity);

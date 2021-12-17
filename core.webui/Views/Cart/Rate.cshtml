@@ -46,7 +46,7 @@
 }
 
 <div class="container">
-	<h2 class="text-center">Bootstrap 4 User Rating Form / Comment Form</h2>
+	<h2 class="text-center">@Model.Name adlı ürün için yorum @(ViewBag.Comment!= null ? "düzenle" : "oluştur")</h2>
 	<div class="card">
 		<div class="card-body">
 			<div class="row">
@@ -59,22 +59,18 @@
 						<input name="ProductId" value="@Model.ProductId" hidden>
 						<p>
 						<div class="rate">
-							<input type="radio" id="star5" name="Rate" value="5" />
-							<label for="star5" title="text">5 stars</label>
-							<input type="radio" id="star4" name="Rate" value="4" />
-							<label for="star4" title="text">4 stars</label>
-							<input type="radio" id="star3" name="Rate" value="3" />
-							<label for="star3" title="text">3 stars</label>
-							<input type="radio" id="star2" name="Rate" value="2" />
-							<label for="star2" title="text">2 stars</label>
-							<input type="radio" id="star1" name="Rate" value="1" />
-							<label for="star1" title="text">1 star</label>
+							@for (int i = 5; i > 0; i--)
+							{
+								<input type="radio" id="star@(i)" name="Rate" value="@(i)" @( ViewBag.Comment != null &&(int)Math.Round(ViewBag.Comment.Rate)== i ? "checked" : null ) />
+								<label for="star@(i)" title="text">@(i) star</label>
+							}
 						</div>
 						</p>
 
 						<div class="clearfix"></div>
-						<p><input class="form-control my-2" name="Title" placeholder="Yorum başlığı"></p>
-						<p><textarea class="form-control my-2" name="Description" rows="4"> </textarea>
+						<p><input class="form-control my-2" name="Title" value=@(ViewBag.Comment!= null ? ViewBag.Comment.Title : null) required></p>
+						<p><textarea class="form-control my-2" name="Description"
+								rows="4" required>@(ViewBag.Comment!= null ? ViewBag.Comment.Description :"")</textarea>
 						<p>
 							<button type="submit" class="btn btn-success ml-2"><a> <i class="fa fa-reply"></i> Yorumu
 									Gönder</a></button>

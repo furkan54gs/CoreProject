@@ -14,7 +14,7 @@ namespace core.data.Concrete.EfCore
             context = ctx;
         }
 
-        public List<TEntity> GetAll()
+        public virtual List<TEntity> GetAll()
         {
             return context.Set<TEntity>().ToList();
         }

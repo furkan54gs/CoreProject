@@ -9,6 +9,7 @@ namespace core.data.Abstract
          IOrderRepository Orders {get;}
          IProductRepository Products {get;}
          ICommentRepository Comments {get;}
+         IImageRepository Images {get;}
          void Save();
 
     }

@@ -34,5 +34,6 @@ namespace core.webui.Models
         public bool IsApproved { get; set; }
         public bool IsHome { get; set; }
         public List<Category> SelectedCategories { get; set; }
+        public List<Image> Images { get; set; }
     }
 }

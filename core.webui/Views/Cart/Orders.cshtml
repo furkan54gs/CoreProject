@@ -19,20 +19,18 @@
             {
                 <tr>
                     <td><img src="~/img/@orderItem.ImageUrl" alt="" width="50"></td>
-                    <td>
-                        @orderItem.Name
-                    </td>
+                    <td><a href="~/@orderItem.ProductUrl">@orderItem.Name</a></td>
                     <td>@orderItem.Price</td>
                     <td>@orderItem.Quantity</td>
                     <td>
                         @if (order.OrderState == EnumOrderState.delivered)
                         {
-                             <a class="btn btn-info" href="/orders/rate-it/@orderItem.ProductId" aria-label="Comment"><i class="fa fa-comment"
-                        aria-hidden="true"></i>Yorum Yap</a>
+                            <a class="btn btn-info" href="/orders/rate-it/@orderItem.ProductId" aria-label="Comment"><i
+                        class="fa fa-comment" aria-hidden="true"></i>Yorum Yap</a>
                         }
 
-                        <a class="btn btn-danger" href="/orders/cancel-it/@orderItem.ProductId" aria-label="Cancel"><i class="fa fa-times"
-                        aria-hidden="true"></i>İptal Et</a>
+                        <a class="btn btn-danger" href="/orders/cancel-it/@orderItem.ProductId" aria-label="Cancel"><i
+                        class="fa fa-times" aria-hidden="true"></i>İptal Et</a>
                     </td>
                 </tr>
             }

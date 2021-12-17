@@ -40,6 +40,8 @@ namespace core.data.Concrete.EfCore
                 return CoreContext.Carts
                             .Include(i=>i.CartItems)
                             .ThenInclude(i=>i.Product)
+                            .ThenInclude(i=>i.Images.Take(1))
+                            .AsSplitQuery()
                             .FirstOrDefault(i=>i.UserId==userId);
         }
 

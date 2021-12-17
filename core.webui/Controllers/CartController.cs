@@ -24,7 +24,7 @@ namespace core.webui.Controllers
         private IProductService _productservice;
         private ICommentService _commentservice;
         private UserManager<User> _userManager;
-        public CartController(IOrderService orderService, ICartService cartService, IProductService productservice,ICommentService commentservice, UserManager<User> userManager)
+        public CartController(IOrderService orderService, ICartService cartService, IProductService productservice, ICommentService commentservice, UserManager<User> userManager)
         {
             _cartService = cartService;
             _orderService = orderService;
@@ -44,7 +44,7 @@ namespace core.webui.Controllers
                     ProductId = i.ProductId,
                     Name = i.Product.Name,
                     Price = (decimal)i.Product.Price,
-                    ImageUrl = i.Product.ImageUrl,
+                    ImageUrl = i.Product.Images.Any() ? i.Product.Images.First().Name.ToString() : "default.jpg",
                     Quantity = i.Quantity
 
                 }).ToList()
@@ -107,7 +107,7 @@ namespace core.webui.Controllers
                         ProductId = i.ProductId,
                         Name = i.Product.Name,
                         Price = (decimal)i.Product.Price,
-                        ImageUrl = i.Product.ImageUrl,
+                        ImageUrl = i.Product.Images.Any() ? i.Product.Images.First().Name.ToString() : "default.jpg",
                         Quantity = i.Quantity
 
                     }).ToList()
@@ -147,11 +147,10 @@ namespace core.webui.Controllers
 
         public IActionResult GetOrders()
         {
-            var userId = _userManager.GetUserId(User);
-            var orders = _orderService.GetOrders(userId);
-
+            var orders = _orderService.GetOrders(_userManager.GetUserId(User));
             var orderListModel = new List<OrderListModel>();
             OrderListModel orderModel;
+
             foreach (var order in orders)
             {
                 orderModel = new OrderListModel();
@@ -172,11 +171,11 @@ namespace core.webui.Controllers
                 {
                     OrderItemId = i.Id,
                     ProductId = i.ProductId,
+                    ProductUrl = i.Product.Url,
                     Name = i.Product.Name,
                     Price = (decimal)i.Price,
                     Quantity = i.Quantity,
-                    ImageUrl = i.Product.ImageUrl
-
+                    ImageUrl = i.Product.Images.Any() ? i.Product.Images.First().Name.ToString() : "default.jpg" //! image zorunlu olursa kontrole gerek yok
                 }).ToList();
 
                 orderListModel.Add(orderModel);
@@ -258,14 +257,13 @@ namespace core.webui.Controllers
 
         public IActionResult Rate(int id)
         {
-
-            //dönen itemi döndür. view de foto ve ad kısmında göster. form inputları ekle ve post işlemini gerçekleştir.
-            entity.Product product = _productservice.GetById(id);
+            ViewBag.Comment = _commentservice.GetByUserProdId(_userManager.GetUserId(User), id);
+            entity.Product product = _productservice.GetByIdWithAll(id);
             ProductModel productview = new ProductModel()
             {
                 ProductId = product.ProductId,
                 Name = product.Name,
-                ImageUrl = product.ImageUrl
+                ImageUrl = product.Images.Any() ? product.Images.First().Name.ToString() : "default.jpg"
             };
             return View(productview);
         }
@@ -273,19 +271,35 @@ namespace core.webui.Controllers
         [HttpPost]
         public IActionResult Rate(CommentModel commentFromView)
         {
-            //if you want more secure; get all orderitems bought by user and check productId
-            Comment comment = new Comment()
+            //* Datetime oluştuğu an commentConfig'den default değer alır.
+
+            Comment commentFromDb = _commentservice.GetByUserProdId(_userManager.GetUserId(User), commentFromView.ProductId);
+
+            if (commentFromDb != null)
             {
-                UserId = _userManager.GetUserId(User),
-                ProductId = commentFromView.ProductId,
-                Title = commentFromView.Title,
-                Description = commentFromView.Description,
-                Rate = commentFromView.Rate,
-                DateAdded = DateTime.Now,
-                IsApproved = false
-            };
-            _commentservice.Create(comment);
-            _productservice.CommentUpdate(commentFromView.ProductId,(double)commentFromView.Rate);
+                commentFromDb.Title = commentFromView.Title;
+                commentFromDb.Description = commentFromView.Description;
+                commentFromDb.Rate = commentFromView.Rate;
+                commentFromDb.IsApproved = false;
+                commentFromDb.DateAdded = DateTime.Now;
+
+                _commentservice.Update(commentFromDb);
+            }
+            else
+            {
+                Comment comment = new Comment()
+                {
+                    UserId = _userManager.GetUserId(User),
+                    ProductId = commentFromView.ProductId,
+                    Title = commentFromView.Title,
+                    Description = commentFromView.Description,
+                    Rate = commentFromView.Rate,
+                    IsApproved = false,
+
+                };
+                _commentservice.Create(comment);
+                _productservice.CommentUpdate(commentFromView.ProductId, (double)commentFromView.Rate);
+            }
 
             var msg = new AlertMessage()
             {

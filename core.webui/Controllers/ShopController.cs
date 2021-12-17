@@ -61,7 +61,8 @@ namespace core.webui.Controllers
             {
                 Product = product,
                 Categories = product.ProductCategories.Select(i => i.Category).ToList(),
-                Comments =comment
+                Comments =comment,
+                Images = product.Images
             });
         }
 

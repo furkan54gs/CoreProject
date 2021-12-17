@@ -48,9 +48,9 @@ namespace core.business.Concrete
             return _unitofwork.Products.GetById(id);
         }
 
-        public Product GetByIdWithCategories(int id)
+        public Product GetByIdWithAll(int id)
         {
-            return _unitofwork.Products.GetByIdWithCategories(id);
+            return _unitofwork.Products.GetByIdWithAll(id);
         }
 
         public int GetCountByCategory(string category)

@@ -17,6 +17,7 @@ namespace core.data.Concrete.EfCore
         public DbSet<Order> Orders { get; set; }
         public DbSet<OrderItem> OrderItems { get; set; }
         public DbSet<Comment> Comments { get; set; }
+        public DbSet<Image> Images { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -25,6 +26,7 @@ namespace core.data.Concrete.EfCore
             modelBuilder.ApplyConfiguration(new ProductCategoryConfiguration());
             modelBuilder.ApplyConfiguration(new OrderItemConfiguration());
             modelBuilder.ApplyConfiguration(new CommentConfiguration());
+            //modelBuilder.ApplyConfiguration(new ImageConfiguration());
 
             modelBuilder.Seed();
         }

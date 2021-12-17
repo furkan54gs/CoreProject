@@ -5,18 +5,19 @@
 -fluent apilerin düzenlenmesi ve türkçeleştirilmesi
 -gerekli model eklemeleri ve güncelleştirmeleri
 -profil sayfası oluşturulması
--ürünler için yorum ve admin için yorum  onay bölümü
+-ürünler için yorum ve admin için yorum onay bölümü
 -ürün eklendiğinde stock güncellemesi ve siparişte rate güncellemesi
 -ürünlerin özelliğine göre artan veya azalan sıralama eklenmesi
 -category url ve product url otomatik oluşturma
 -ürün stock ve adet bağlantısı (stocktan fazla sipariş verilmesin)
--ödeme yöntemi (iyzico to stripe)
+-ödeme yöntemi (iyzico'dan stripe'a)
 -price double to decimal
 
--------------------------undone----------------------
-
--ürünler için slider ve çoklu foto
--admin list of all orders
+-------------------------to-do----------------------
+-rate sayfasındaki yıldızlar 'ı detaile kopyala
+-çoklu foto sistemi ve ürünler için slider
+-admin için tüm siparişler ekranı
+-sipariş iptal
 -product create, edit sayfasıyla aynı
 -navbar linkleri ekle ve düzenle
 -harita ekle ve yer bilgisi göster, iletişim bölümü ekle
@@ -29,10 +30,11 @@
 
 
 -------------------------after essentials-----------------
-*category amazon arayüzüne benzer yapı
+
 *category subtree
 *seo uyunmluluğu
 *discount sistemi
+*new template
 *web api ve mobil uygulama
 
 

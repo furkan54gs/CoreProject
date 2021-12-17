@@ -77,12 +77,12 @@ namespace core.webui
             });
 
             services.AddScoped<IUnitOfWork, UnitOfWork>();
-
             services.AddScoped<IProductService, ProductManager>();
             services.AddScoped<ICategoryService, CategoryManager>();
             services.AddScoped<ICartService, CartManager>();
             services.AddScoped<IOrderService, OrderManager>();
             services.AddScoped<ICommentService, CommentManager>();
+            services.AddScoped<IImageService, ImageManager>();
 
             services.AddScoped<IEmailSender, SmtpEmailSender>(i =>
                  new SmtpEmailSender(

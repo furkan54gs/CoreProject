@@ -6,7 +6,7 @@ namespace core.business.Abstract
     public interface IProductService : IValidator<Product>
     {
         Product GetById(int id);
-        Product GetByIdWithCategories(int id);
+        Product GetByIdWithAll(int id);
         Product GetProductDetails(string url);
         List<Product> GetProductsByCategory(string name, string orderby, int page, int pageSize);
         int GetCountByCategory(string category);

@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using core.data.Abstract;
@@ -27,6 +26,12 @@ namespace core.data.Concrete.EfCore
             }
             return comments.ToList();
         }
+
+        public Comment GetByUserProdId(string userId, int productId)
+        {
+           return CoreContext.Comments.Where(i => i.ProductId==productId && i.UserId==userId).FirstOrDefault();
+        }
+
 
     }
 }

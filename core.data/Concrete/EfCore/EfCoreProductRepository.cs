@@ -18,12 +18,20 @@ namespace core.data.Concrete.EfCore
         {
             get { return context as CoreContext; }
         }
-        public Product GetByIdWithCategories(int id)
+
+        public override List<Product> GetAll()
+        {
+            return CoreContext.Products.Include(i => i.Images).ToList();
+        }
+
+        public Product GetByIdWithAll(int id)
         {
             return CoreContext.Products
                             .Where(i => i.ProductId == id)
                             .Include(i => i.ProductCategories)
                             .ThenInclude(i => i.Category)
+                            .Include(i => i.Images)
+                            .AsSplitQuery()
                             .FirstOrDefault();
         }
 
@@ -62,7 +70,8 @@ namespace core.data.Concrete.EfCore
         public List<Product> GetHomePageProducts()
         {
             return CoreContext.Products
-                .Where(i => i.IsApproved && i.IsHome).ToList();
+                .Where(i => i.IsApproved && i.IsHome)
+                .Include(i => i.Images.Take(1)).ToList();
         }
         public Product GetProductDetails(string url)
         {
@@ -70,6 +79,8 @@ namespace core.data.Concrete.EfCore
                             .Where(i => i.Url == url)
                             .Include(i => i.ProductCategories)
                             .ThenInclude(i => i.Category)
+                            .Include(i => i.Images)
+                            .AsSplitQuery()
                             .FirstOrDefault();
 
         }
@@ -78,6 +89,8 @@ namespace core.data.Concrete.EfCore
             var products = CoreContext
                 .Products
                 .Where(i => i.IsApproved)
+                .Include(i => i.Images.Take(1))
+                .AsSplitQuery()
                 .AsQueryable();
 
             if (!string.IsNullOrEmpty(name))
@@ -121,6 +134,8 @@ namespace core.data.Concrete.EfCore
             var products = CoreContext
                 .Products
                 .Where(i => i.IsApproved && (i.Name.ToLower().Contains(searchString.ToLower()) || i.Description.ToLower().Contains(searchString.ToLower())))
+                .Include(i => i.Images.Take(1))
+                .AsSplitQuery()
                 .AsQueryable();
 
             return products.ToList();

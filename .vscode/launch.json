@@ -8,7 +8,7 @@
             "name": ".NET Core Chrome Launch",
             "type": "coreclr",
             "request": "launch",
-            "preLaunchTask": "build",
+            "preLaunchTask": "buildx",
             // If you have changed target frameworks, make sure to update the program path.
             "program": "${workspaceFolder}/core.webui/bin/Debug/net5.0/core.webui.dll",
             "args": [],
@@ -33,7 +33,7 @@
             "name": ".NET Core Edge Launch",
             "type": "coreclr",
             "request": "launch",
-            "preLaunchTask": "build",
+            "preLaunchTask": "buildx",
             // If you have changed target frameworks, make sure to update the program path.
             "program": "${workspaceFolder}/core.webui/bin/Debug/net5.0/core.webui.dll",
             "args": [],

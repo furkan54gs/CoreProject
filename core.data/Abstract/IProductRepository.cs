@@ -6,7 +6,7 @@ namespace core.data.Abstract
     public interface IProductRepository : IRepository<Product>
     {
         Product GetProductDetails(string url);
-        Product GetByIdWithCategories(int id);
+        Product GetByIdWithAll(int id);
         List<Product> GetProductsByCategory(string name, string orderby, int page, int pageSize);
         List<Product> GetSearchResult(string searchString);
         List<Product> GetHomePageProducts();
