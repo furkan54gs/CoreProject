@@ -171,6 +171,33 @@ namespace core.data.Concrete.EfCore
             }
         }
 
+        public void Create(Product entity, int[] categoryIds, List<string> imagesName)
+        {
+            if (entity != null)
+            {
+                CoreContext.Products.Add(entity);
+            }
+
+            if (categoryIds != null)
+            {
+                entity.ProductCategories = categoryIds.Select(catid => new ProductCategory()
+                {
+                    ProductId = entity.ProductId,
+                    CategoryId = catid
+                }).ToList();
+            }
+            if (imagesName != null)
+            {
+                entity.Images = imagesName.Select(pName => new Image()
+                {
+                    ProductId = entity.ProductId,
+                    Name = pName
+                }).ToList();
+            }
+
+        }
+
+
         public void Update(Product entity, int[] categoryIds)
         {
             var product = CoreContext.Products
@@ -186,7 +213,6 @@ namespace core.data.Concrete.EfCore
                 product.Stock = entity.Stock;
                 product.Description = entity.Description;
                 product.Url = entity.Url;
-                product.ImageUrl = entity.ImageUrl;
                 product.IsApproved = entity.IsApproved;
                 product.IsHome = entity.IsHome;
 

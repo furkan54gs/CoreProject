@@ -9,14 +9,6 @@ core.webui/bin/
 core.webui/obj/
 core.webui/node_modules/
 core.webui/appsettings.json
-core.webui/todo.txt
-core.webui/wwwroot/img/43b77dec-5ff6-4d32-a8c2-5e53a312b312 - Kopya (2).jpg
-core.webui/wwwroot/img/43b77dec-5ff6-4d32-a8c2-5e53a312b312 - Kopya (3).jpg
-core.webui/wwwroot/img/43b77dec-5ff6-4d32-a8c2-5e53a312b312 - Kopya (4).jpg
-core.webui/wwwroot/img/292ffb30-83b4-4ae4-8214-0817c2151e9e.jpg
-core.webui/wwwroot/img/5666d00e-3642-43d9-bb12-46af294249d1.jpg
-core.webui/wwwroot/img/6136ac43-128e-4259-b578-49e10ba859d6.jpg
-core.webui/wwwroot/img/16988d4d-8aa0-4cb6-bcd0-d3f14e3e76a3.jpg
-core.webui/wwwroot/img/bcaf53e2-3307-4f87-937b-d23fe770f241.jpg
-core.webui/wwwroot/img/f0e1d4a9-5df3-486b-aa36-0013968e668c.jpg
-core.webui/wwwroot/img/s3df4567fsd-sdf5657dsf8f9ds.jpg
+todo.txt
+core.webui/wwwroot/img/
+workspace.code-workspace

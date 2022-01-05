@@ -12,6 +12,7 @@ namespace core.data.Abstract
         List<Product> GetHomePageProducts();
         int GetCountByCategory(string category);
         void Update(Product entity, int[] categoryIds);
+        void Create(Product entity, int[] categoryIds,List<string> imagesName);
         int GetCountByApproved(bool isApproved);
         void StockUpdate(int productId, int quantity);
         void CommentUpdate(int productId, double rate);

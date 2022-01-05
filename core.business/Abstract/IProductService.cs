@@ -20,5 +20,6 @@ namespace core.business.Abstract
         void Update(Product entity);
         void Delete(Product entity);
         bool Update(Product entity, int[] categoryIds);
+        bool Create(Product entity, int[] categoryIds,List<string> imagesName);
     }
 }

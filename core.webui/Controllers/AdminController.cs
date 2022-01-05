@@ -234,27 +234,43 @@ namespace core.webui.Controllers
         }
         public IActionResult ProductCreate()
         {
+            ViewBag.Categories = _categoryService.GetAll();
             return View();
         }
 
         [HttpPost]
-        public IActionResult ProductCreate(ProductModel model)
+        public async Task<IActionResult> ProductCreate(ProductModel model, int[] categoryIds, IFormFile[] files)
         {
             if (ModelState.IsValid)
             {
-                var entity = new Product()
+                if (files != null && files.Any())
                 {
-                    Name = model.Name,
-                    Url = model.Url,
-                    Price = model.Price,
-                    Rate = 0,
-                    Stock = model.Stock,
-                    Description = model.Description,
-                    ImageUrl = model.ImageUrl
-                };
+                    List<string> imagesName = new List<string>();
+                    foreach (var item in files)
+                    {
+                        var extention = Path.GetExtension(item.FileName);
+                        string randomName = string.Format($"{Guid.NewGuid()}{extention}");
+                        imagesName.Add(randomName);
+                        var path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot\\img", randomName);
 
-                if (_productService.Create(entity))
-                {
+                        using (var stream = new FileStream(path, FileMode.Create))
+                        {
+                            await item.CopyToAsync(stream);
+                        }
+
+                    }
+                    var entity = new Product()
+                    {
+                        Name = model.Name,
+                        Price = model.Price,
+                        Rate = 0,
+                        Stock = model.Stock,
+                        Description = model.Description,
+                        IsHome = model.IsHome,
+                        IsApproved = model.IsApproved,
+                    };
+                    _productService.Create(entity, categoryIds, imagesName);
+
                     TempData.Put("message", new AlertMessage()
                     {
                         Title = "kayıt eklendi",
@@ -269,11 +285,12 @@ namespace core.webui.Controllers
                     Message = _productService.ErrorMessage,
                     AlertType = "danger"
                 });
-
-                return View(model);
             }
+
+            ViewBag.Categories = _categoryService.GetAll();
             return View(model);
         }
+
         public IActionResult CategoryCreate()
         {
             return View();
@@ -324,7 +341,6 @@ namespace core.webui.Controllers
                 Price = entity.Price,
                 Rate = entity.Rate,
                 Stock = entity.Stock,
-                ImageUrl = entity.ImageUrl,
                 Description = entity.Description,
                 IsApproved = entity.IsApproved,
                 IsHome = entity.IsHome,
@@ -363,7 +379,6 @@ namespace core.webui.Controllers
                     {
                         var extention = Path.GetExtension(item.FileName);
                         var randomName = string.Format($"{Guid.NewGuid()}{extention}");
-                        // entity.ImageUrl = randomName;
                         _imageService.Create(new Image
                         {
                             ProductId = model.ProductId,

@@ -133,7 +133,7 @@ namespace core.webui.Controllers
                         ProductId = i.ProductId,
                         Name = i.Product.Name,
                         Price = (decimal)i.Product.Price,
-                        ImageUrl = i.Product.ImageUrl,
+                        ImageUrl = i.Product.Images.Any() ? i.Product.Images.First().Name.ToString() : "default.jpg",
                         Quantity = i.Quantity
                     }).ToList()
                 };

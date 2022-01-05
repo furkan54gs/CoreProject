@@ -99,6 +99,23 @@ namespace core.business.Concrete
             }
             return false;
         }
+        public bool Create(Product entity, int[] categoryIds, List<string> imagesName)
+        {
+            if (Validation(entity))
+            {
+                if (categoryIds.Length == 0)
+                {
+                    ErrorMessage += "Ürün için en az bir kategori seçmelisiniz.";
+                    return false;
+                }
+                entity.Url = Replacements.ConvertUrl(entity.Name);
+                _unitofwork.Products.Create(entity, categoryIds, imagesName);
+                _unitofwork.Save();
+
+                return true;
+            }
+            return false;
+        }
 
         public string ErrorMessage { get; set; }
 

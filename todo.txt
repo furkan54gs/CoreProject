@@ -10,7 +10,7 @@
 -ürünlerin özelliğine göre artan veya azalan sıralama eklenmesi
 -category url ve product url otomatik oluşturma
 -ürün stock ve adet bağlantısı (stocktan fazla sipariş verilmesin)
--ödeme yöntemi (iyzico'dan stripe'a)
+-ödeme yöntemi (stripe)
 -price double to decimal
 
 -------------------------to-do----------------------
@@ -26,7 +26,7 @@
 -anasayfa carousel
 -order controller oluştur, tüm view'leri elden geçir
 -sipariş kontrolü ve orderstate hızlı değişim için admine özel sayfa ekle
-
+-productmanagerdaki validation kısmını çeşitlendir
 
 
 -------------------------after essentials-----------------
